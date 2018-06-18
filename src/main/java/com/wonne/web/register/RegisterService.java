@@ -11,12 +11,13 @@ public final class RegisterService {
     private final Connection connection;
     private final PreparedStatement pStatement;
     
-    private final static String TABLE   = "User";
-    private final static String NAME    = RegisterService.class.getSimpleName( );
-    private final static Logger LOGGER  = LoggerFactory.getLogger( NAME );
+    private final static String TABLE_NAME  = "User";
+    private final static String MYSQL_DRIVER= "com.mysql.cj.jdbc.Driver";
+    private final static String NAME        = RegisterService.class.getSimpleName( );
+    private final static Logger LOGGER      = LoggerFactory.getLogger( NAME );
     
     public RegisterService( ){    
-        this.dbConn     = new DBConnection( );
+        this.dbConn     = new DBConnection( MYSQL_DRIVER );
         this.connection = dbConn.getAWSDBConnection( );
         this.pStatement = createPStatement( connection );
     }
@@ -57,7 +58,7 @@ public final class RegisterService {
         PreparedStatement pStatement = null;
     
         try {
-            pStatement  = connection.prepareStatement("INSERT INTO " + TABLE + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+            pStatement  = connection.prepareStatement("INSERT INTO " + TABLE_NAME + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
             
         }catch( Exception e ) {
             LOGGER.warn( "FAILED to created prepared statement.", e );

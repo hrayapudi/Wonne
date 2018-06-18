@@ -8,14 +8,12 @@ import java.sql.DriverManager;
 
 public final class DBConnection{
     
-    static {
-        loadDriver( );
-    }
-    
-    private final static String DRIVER  = "com.mysql.jdbc.Driver";
     private final static String NAME    = DBConnection.class.getSimpleName( );
     private final static Logger LOGGER  = LoggerFactory.getLogger( NAME );
     
+    public DBConnection( String driverClassName ) {
+        loadDriver( driverClassName );
+    }
     
     public final Connection getAWSDBConnection( ){
         
@@ -29,6 +27,19 @@ public final class DBConnection{
         return awsDBConn;
     }
     
+    /*
+    public final Connection getDevConnection( ){
+        
+        String hostname     = "wonnedevdb.cmtwfoal5czm.us-east-2.rds.amazonaws.com";
+        String port         = "3306";
+        String dbName       = "WonneDB";
+        String userName     = "hrayapudi";
+        String password     = "Wonne22#";
+        Connection awsDBConn= getConnection( hostname, port, dbName, userName, password );
+        
+        return awsDBConn;
+    }
+    */
     
         
     public final Connection getConnection( String hostname, String port, String dbName, String userName, String password ){
@@ -57,12 +68,12 @@ public final class DBConnection{
     }
     
     
-    private final static void loadDriver( ){
+    private final static void loadDriver( String driverClassName  ){
         try {
-            Class.forName( DRIVER );
+            Class.forName( driverClassName );
             
         }catch( ClassNotFoundException e ) {
-            LOGGER.error( "Exiting as we FAILED to load database driver {}", DRIVER, e );
+            LOGGER.error( "Exiting as we FAILED to load database driver {}", driverClassName, e );
             System.exit(1);
         }
     }

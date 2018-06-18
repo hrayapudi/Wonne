@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
-        response.sendRedirect( "/Login.jsp");
+        response.sendRedirect( "/RegistrationSuccess.html");
             
     }
     

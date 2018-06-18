@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Register || Wonne Web</title>
+	<title>Wonne Web</title>
 
 	<!-- responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,13 +11,10 @@
 	<link rel="stylesheet" href="css/style.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
-
-
-
 </head>
+
 <body>
 
-	
 	<section class="top-bar">
 
             <div class="container">
@@ -45,7 +42,6 @@
 			<div class="navigation pull-left">
 				<div class="nav-header">
 					<ul>
-                                            <li><a href="index.html">Home</a></li>
                                             <li><a href="about.html">About Us</a></li>			
                                             <li><a href="foundation.html">Wonne Foundation</a></li>
                                             <li><a href="markets.html">Wonne Markets</a></li>
@@ -62,8 +58,9 @@
 								<li><a href="service-details.html">single tabbed version</a></li>
 							</ul>
                                             </li>
+                                            <li><a href="register.html">Register</a></li>	
                                             <li><a href="blog.html">Blog</a></li>	
-                                            <li><a href="faq.html">FAQ</a></li>                                                                                                                             
+                                            <li><a href="faq.html">FAQ</a></li>                                                                                                                    
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -78,63 +75,39 @@
 			</div>
 		</div>
 	</nav> <!-- /.mainmenu-area -->
-            
-	
-	<section class="sec-padding contact-content appointment-content">
-		<div class="container">
-			<div class="title-box">
-				<span>Register</span>				
-			</div>
+
+
+	<section class="rev_slider_wrapper">
+		
+		<div id="slider1" class="rev_slider"  data-version="5.0">
+		
+			<ul>
+            	<li data-transition="parallaxvertical">
+        	        <img src="img/slides/yoga1.png"  alt="" width="1920" height="705" data-bgposition="top center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="1" >
+                        <div class="tp-caption sfr tp-resizeme thm-banner-h1 heavy" 
+				        	data-x="left" data-hoffset="0" 
+				        	data-y="top" data-voffset="75" 
+				        	data-whitespace="nowrap"
+				        	data-transform_idle="o:1;" 
+				        	data-transform_in="o:0" 
+				        	data-transform_out="o:0" 
+				        	data-start="500">
+							Registration Successful
+				    	</div>
+				    </img>
+				</li>                                                                      
+			</ul>
 			
-			<form action="RegisterServlet" id="appointment-page-form" class="contact-form row" method="POST">
-				<div class="col-md-7">
-					<div class="row">
-						<div class="col-md-6">
-							<input type="text" name="fullname" placeholder="Full Name">
-                            <input type="password" name="password" placeholder="Password">
-                            <input type="text" name="company" placeholder="Company Name">
-                            <input type="text" name="address" placeholder="Address">
-                            <div class="select-input-wrapper">
-								<select class="select-input" name="organization">
-									<option value="" selected="selected">Select your organization</option>
-                                    <option value="PharmaSupplier" >Pharma Supplier</option>
-									<option value="PharmaClient">Pharma Client</option>									
-								</select>
-							</div>							
-						</div>
-						
-						<div class="col-md-6">
-							<input type="text" name="email" placeholder="Email">
-                            <input type="password" name="repassword" placeholder="Retype Password">
-                            <input type="text" name="title" placeholder="Title">
-                            <input type="text" name="phone" placeholder="Phone">
-							<div class="select-input-wrapper">
-								<select class="select-input" name="role">
-									<option value="" selected="selected">Select your role</option>
-                                    <option value="PatientServicesLead" >Patient Services Lead</option>
-									<option value="MarketAccessLead">Market Access Lead</option>									
-								</select>
-							</div>							
-						</div>
-						
-					</div>					
-				</div>
-				
-				<div class="col-md-5">
-					<textarea name="message" placeholder="Message" cols="30" rows="10"></textarea>
-				</div>
-				<div class="col-md-12"><button type="submit">Register</button></div>
-			
-			</form>
 		</div>
+		
 	</section>
+
 	
-
-
-	<section class="footer-call-to-action">		
+	<section class="footer-call-to-action">
 	</section>
+        
 	
-        <footer class="footer sec-padding">
+	<footer class="footer sec-padding">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
@@ -185,9 +158,6 @@
 			</div>
 		</div>
 	</footer>
-        
-        
-
 
 	<!-- main jQuery -->
 	<script src="js/jquery-1.11.1.min.js"></script>
@@ -233,11 +203,8 @@
 	<script type="text/javascript" src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
 	<script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>
 
-
 	<!-- thm custom script -->
 	<script src="js/custom.js"></script>
-
-
 
 </body>
 </html>
