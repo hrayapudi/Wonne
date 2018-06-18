@@ -16,25 +16,32 @@ public final class DBConnection{
     private final static String NAME    = DBConnection.class.getSimpleName( );
     private final static Logger LOGGER  = LoggerFactory.getLogger( NAME );
     
+    
+    public final Connection getAWSDBConnection( ){
         
-    public final static Connection getConnection( ){
+        String hostname     = System.getProperty("RDS_HOSTNAME");
+        String port         = System.getProperty("RDS_PORT");
+        String dbName       = System.getProperty("RDS_DB_NAME");
+        String userName     = System.getProperty("RDS_USERNAME");
+        String password     = System.getProperty("RDS_PASSWORD");
+        Connection awsDBConn= getConnection( hostname, port, dbName, userName, password );
+        
+        return awsDBConn;
+    }
+    
+    
+        
+    public final Connection getConnection( String hostname, String port, String dbName, String userName, String password ){
          
         Connection connection   = null;
         
         try {
-                    
-            String hostname     = System.getProperty("RDS_HOSTNAME");
-            String port         = System.getProperty("RDS_PORT");
-            String dbName       = System.getProperty("RDS_DB_NAME");
-            String userName     = System.getProperty("RDS_USERNAME");
-            String password     = System.getProperty("RDS_PASSWORD");
-            
             String jdbcUrl      = createUrl( hostname, port, dbName, userName, password );
-            LOGGER.trace("Getting remote connection with connection string from environment variables.");
+            LOGGER.info("Attempting to connect to DB with url {}", jdbcUrl);
 
             connection          = DriverManager.getConnection(jdbcUrl);
-            LOGGER.info("Remote connection successful.");
-      
+            LOGGER.info("Successfully connected to {}", jdbcUrl);
+            
         }catch( Exception e) { 
             LOGGER.error("FAILED to create DB connection", e );
         }

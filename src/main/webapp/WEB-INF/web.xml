@@ -11,4 +11,14 @@
   	<welcome-file>index.jsp</welcome-file>  	
   </welcome-file-list>
   
+    <servlet>
+    	<servlet-name>RegisterServlet</servlet-name>
+    	<servlet-class>com.wonne.web.servlet.RegisterServlet</servlet-class>
+  	</servlet>
+  	
+  	<servlet-mapping>
+    	<servlet-name>RegisterServlet</servlet-name>
+    	<url-pattern>/RegisterServlet</url-pattern>
+  	</servlet-mapping>
+  
 </web-app>
