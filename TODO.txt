@@ -2,10 +2,13 @@
 Registration
 ===================================
 1. When performing client-side validation, show the errors as info messages.
-2. Add validation for email & phone.
-3. Should address alos have city, state & zip?
+2. Add validation for email & phone & zip & state.
+3. Can we add a drop down for states.
 4. When performing server-side validation, show errors as info messages.
 5. Once registration is successful, show the email as loginId and password.
+6. Place the Register & Reset button in the middle
+7. Reset should also rest drop down selection
+
 
 Login
 ===================================
@@ -15,3 +18,8 @@ Work on Login Page
 Logout
 ===================================
 How will logout work, should user manually be able to logout?
+
+
+
+
+NOTES:

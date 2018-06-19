@@ -80,25 +80,39 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("/Register.html").forward(request, response);
             return false;
         }
-        
-        if( !isValid(bean.getTitle()) ){
-            request.setAttribute("error", "Title is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        
-        if( !isValid(bean.getAddress()) ){
-            request.setAttribute("error", "Address is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
+                
         if( !isValid(bean.getPhone()) ){
             request.setAttribute("error", "Phone number is invalid!");
             request.getRequestDispatcher("/Register.html").forward(request, response);
             return false;
         }
+                
+        if( !isValid(bean.getAddress()) ){
+            request.setAttribute("error", "Address is invalid!");
+            request.getRequestDispatcher("/Register.html").forward(request, response);
+            return false;
+        }
+
+        if( !isValid(bean.getCity()) ){
+            request.setAttribute("error", "City is invalid!");
+            request.getRequestDispatcher("/Register.html").forward(request, response);
+            return false;
+        }
+        
+        
+        if( !isValid(bean.getState()) ){
+            request.setAttribute("error", "State is invalid!");
+            request.getRequestDispatcher("/Register.html").forward(request, response);
+            return false;
+        }
+        
+        
+        if( !isValid(bean.getZip()) ){
+            request.setAttribute("error", "Zipcode is invalid!");
+            request.getRequestDispatcher("/Register.html").forward(request, response);
+            return false;
+        }
+        
         
         if( !isValid(bean.getOrganization()) ){
             request.setAttribute("error", "Organization selection is invalid!");
@@ -129,13 +143,16 @@ public class RegisterServlet extends HttpServlet {
             String password     = request.getParameter("password");
             String repassword   = request.getParameter("repassword");
             String company      = request.getParameter("company");
-            String title        = request.getParameter("title");
-            String address      = request.getParameter("address");
             String phone        = request.getParameter("phone");
+            String address      = request.getParameter("address");
+            String city         = request.getParameter("city");
+            String state        = request.getParameter("state");
+            String zipcode      = request.getParameter("zip");
+            
             String organization = request.getParameter("organization");
             String role         = request.getParameter("role");
      
-            bean                = new RegisterBean(fullName, email, password, repassword, company, title, address, phone, organization, role );
+            bean                = new RegisterBean(fullName, email, password, repassword, company, phone, address, city, state, zipcode, organization, role );
             
         }catch( Exception e ){
             System.err.println("FAILED to parse input parameters");

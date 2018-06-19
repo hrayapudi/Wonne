@@ -33,11 +33,14 @@ public final class RegisterService {
             pStatement.setString( 2, bean.getEmail( ) );
             pStatement.setString( 3, bean.getPassword( ) );
             pStatement.setString( 4, bean.getCompanyName( ) );
-            pStatement.setString( 5, bean.getAddress( ) );
-            pStatement.setString( 6, bean.getPhone( ) );
-            pStatement.setString( 7, bean.getTitle( ) );
-            pStatement.setString( 8, bean.getOrganization( ) );
-            pStatement.setString( 9, bean.getRole( ) );
+            pStatement.setString( 5, bean.getPhone( ) );
+            
+            pStatement.setString( 6, bean.getAddress( ) );
+            pStatement.setString( 7, bean.getCity( ) );
+            pStatement.setString( 8, bean.getState( ) );
+            pStatement.setString( 9, bean.getZip( ) );
+            pStatement.setString( 10, bean.getOrganization( ) );
+            pStatement.setString( 11, bean.getRole( ) );
                                     
             updateResult        = pStatement.executeUpdate( );
             LOGGER.info( "Successfully registered user", bean );
@@ -57,7 +60,7 @@ public final class RegisterService {
         PreparedStatement pStatement = null;
     
         try {
-            pStatement  = connection.prepareStatement("INSERT INTO " + TABLE_NAME + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            pStatement  = connection.prepareStatement("INSERT INTO " + TABLE_NAME + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
         }catch( Exception e ) {
             LOGGER.warn( "FAILED to created prepared statement.", e );
