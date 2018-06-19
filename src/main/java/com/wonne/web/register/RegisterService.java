@@ -12,13 +12,13 @@ public final class RegisterService {
     private final PreparedStatement pStatement;
     
     private final static String TABLE_NAME  = "User";
-    private final static String MYSQL_DRIVER= "com.mysql.cj.jdbc.Driver";
+    private final static String MYSQL_DRIVER= "com.mysql.jdbc.Driver";
     private final static String NAME        = RegisterService.class.getSimpleName( );
     private final static Logger LOGGER      = LoggerFactory.getLogger( NAME );
     
     public RegisterService( ){    
         this.dbConn     = new DBConnection( MYSQL_DRIVER );
-        this.connection = dbConn.getAWSDBConnection( );
+        this.connection = dbConn.getDevConnection( );
         this.pStatement = createPStatement( connection );
     }
     
@@ -38,11 +38,10 @@ public final class RegisterService {
             pStatement.setString( 7, bean.getTitle( ) );
             pStatement.setString( 8, bean.getOrganization( ) );
             pStatement.setString( 9, bean.getRole( ) );
-            pStatement.setString( 10, bean.getMessage( ) );
-                        
+                                    
             updateResult        = pStatement.executeUpdate( );
             LOGGER.info( "Successfully registered user", bean );
-            
+                           
         }catch( SQLException e ){
             LOGGER.warn( "FAILED to registered user {}", bean, e );
         
@@ -58,7 +57,7 @@ public final class RegisterService {
         PreparedStatement pStatement = null;
     
         try {
-            pStatement  = connection.prepareStatement("INSERT INTO " + TABLE_NAME + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+            pStatement  = connection.prepareStatement("INSERT INTO " + TABLE_NAME + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
         }catch( Exception e ) {
             LOGGER.warn( "FAILED to created prepared statement.", e );

@@ -134,9 +134,8 @@ public class RegisterServlet extends HttpServlet {
             String phone        = request.getParameter("phone");
             String organization = request.getParameter("organization");
             String role         = request.getParameter("role");
-            String message      = request.getParameter("message");
      
-            bean                = new RegisterBean(fullName, email, password, repassword, company, title, address, phone, organization, role, message );
+            bean                = new RegisterBean(fullName, email, password, repassword, company, title, address, phone, organization, role );
             
         }catch( Exception e ){
             System.err.println("FAILED to parse input parameters");

@@ -12,8 +12,6 @@
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
 
-
-
 </head>
 <body>
 
@@ -45,11 +43,11 @@
 			<div class="navigation pull-left">
 				<div class="nav-header">
 					<ul>
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About Us</a></li>			
-                                            <li><a href="foundation.html">Wonne Foundation</a></li>
-                                            <li><a href="markets.html">Wonne Markets</a></li>
-                                            <li class="dropdown">
+                    	<li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>			
+                        <li><a href="foundation.html">Wonne Foundation</a></li>
+                        <li><a href="markets.html">Wonne Markets</a></li>
+                        <li class="dropdown">
 							<a href="services.html">Products</a>
 							<ul class="submenu">
 								<li><a href="health-care.html">Primary Halth Care</a></li>
@@ -61,9 +59,9 @@
 								<li><a href="dental.html">Dental Treatment</a></li>
 								<li><a href="service-details.html">single tabbed version</a></li>
 							</ul>
-                                            </li>
-                                            <li><a href="blog.html">Blog</a></li>	
-                                            <li><a href="faq.html">FAQ</a></li>                                                                                                                             
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>	
+                        <li><a href="faq.html">FAQ</a></li>                                                                                                                             
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -86,14 +84,14 @@
 				<span>Register</span>				
 			</div>
 			
-			<form action="RegisterServlet" id="appointment-page-form" class="contact-form row" method="POST">
+			<form id="register-form" class="contact-form row" action="RegisterServlet" method="POST">
 				<div class="col-md-7">
 					<div class="row">
 						<div class="col-md-6">
-							<input type="text" name="fullname" placeholder="Full Name">
-                            <input type="password" name="password" placeholder="Password">
-                            <input type="text" name="company" placeholder="Company Name">
-                            <input type="text" name="address" placeholder="Address">
+							<input type="text" name="fullname" placeholder="Full Name" required>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <input type="text" name="company" placeholder="Company Name" required>
+                            <input type="text" name="address" placeholder="Address" required>
                             <div class="select-input-wrapper">
 								<select class="select-input" name="organization">
 									<option value="" selected="selected">Select your organization</option>
@@ -104,10 +102,10 @@
 						</div>
 						
 						<div class="col-md-6">
-							<input type="text" name="email" placeholder="Email">
-                            <input type="password" name="repassword" placeholder="Retype Password">
-                            <input type="text" name="title" placeholder="Title">
-                            <input type="text" name="phone" placeholder="Phone">
+							<input type="email" name="email" placeholder="Email" required>
+							<input type="password" name="repassword" placeholder="Retype Password" required>
+                            <input type="text" name="title" placeholder="Title" required>
+                            <input type="text" name="phone" placeholder="Phone" required>
 							<div class="select-input-wrapper">
 								<select class="select-input" name="role">
 									<option value="" selected="selected">Select your role</option>
@@ -115,14 +113,10 @@
 									<option value="MarketAccessLead">Market Access Lead</option>									
 								</select>
 							</div>							
-						</div>
-						
+						</div>						
 					</div>					
 				</div>
 				
-				<div class="col-md-5">
-					<textarea name="message" placeholder="Message" cols="30" rows="10"></textarea>
-				</div>
 				<div class="col-md-12"><button type="submit">Register</button></div>
 			
 			</form>

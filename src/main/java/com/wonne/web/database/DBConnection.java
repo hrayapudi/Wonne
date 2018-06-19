@@ -27,7 +27,7 @@ public final class DBConnection{
         return awsDBConn;
     }
     
-    /*
+    
     public final Connection getDevConnection( ){
         
         String hostname     = "wonnedevdb.cmtwfoal5czm.us-east-2.rds.amazonaws.com";
@@ -39,7 +39,7 @@ public final class DBConnection{
         
         return awsDBConn;
     }
-    */
+    
     
         
     public final Connection getConnection( String hostname, String port, String dbName, String userName, String password ){
@@ -47,10 +47,10 @@ public final class DBConnection{
         Connection connection   = null;
         
         try {
-            String jdbcUrl      = createUrl( hostname, port, dbName, userName, password );
+            String jdbcUrl      = createUrl( hostname, port, dbName );
             LOGGER.info("Attempting to connect to DB with url {}", jdbcUrl);
 
-            connection          = DriverManager.getConnection(jdbcUrl);
+            connection          = DriverManager.getConnection(jdbcUrl, userName, password);
             LOGGER.info("Successfully connected to {}", jdbcUrl);
             
         }catch( Exception e) { 
@@ -63,8 +63,8 @@ public final class DBConnection{
     
     
     
-    private final static String createUrl( String hostname, String port, String dbName, String userName, String password ){
-        return "jdbc:driver://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
+    private final static String createUrl( String hostname, String port, String dbName ){
+        return "jdbc:mysql://" + hostname + ":" + port + "/" + dbName;
     }
     
     

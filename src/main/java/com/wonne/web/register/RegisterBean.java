@@ -16,11 +16,10 @@ public final class RegisterBean {
     private final String phone;
     private final String organization;
     private final String role;
-    private final String message;
     
 
     public RegisterBean(String fullName, String email, String password, String repassword, String companyName, String title, 
-                        String address, String phone, String organization, String role, String message ) {
+                        String address, String phone, String organization, String role ) {
         
         this.fullName   = fullName;
         this.email      = email;
@@ -32,8 +31,7 @@ public final class RegisterBean {
         this.phone      = phone;
         this.organization = organization;
         this.role       = role;
-        this.message    = message;
-        
+                
     }
     
 
@@ -76,17 +74,37 @@ public final class RegisterBean {
     public final String getRole() {
         return role;
     }
-    
-    public final String getMessage() {
-        return message;
-    }
-    
+
 
     @Override
-    public final String toString( ){
-        return "RegisterBean{" + "fullName=" + fullName + ", email=" + email + ", password=" + password + ", repassword=" + repassword +", companyName=" + companyName +
-                ", title=" + title + ", address=" + address + ", phone=" + phone + ", organization=" + organization + ", role=" + role + ", message=" + message + '}';
+    public final String toString( ) {
+        StringBuilder builder = new StringBuilder( 64 );
+        builder.append( "[FullName=" );
+        builder.append( fullName );
+        builder.append( ", email=" );
+        builder.append( email );
+        builder.append( ", password=" );
+        builder.append( password );
+        builder.append( ", repassword=" );
+        builder.append( repassword );
+        builder.append( ", companyName=" );
+        builder.append( companyName );
+        builder.append( ", title=" );
+        builder.append( title );
+        builder.append( ", address=" );
+        builder.append( address );
+        builder.append( ", phone=" );
+        builder.append( phone );
+        builder.append( ", organization=" );
+        builder.append( organization );
+        builder.append( ", role=" );
+        builder.append( role );
+        builder.append( "]" );
+        
+        return builder.toString( );
     }
+        
+
         
     
 }
