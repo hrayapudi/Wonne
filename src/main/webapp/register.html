@@ -12,6 +12,80 @@
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
 
+	<style>
+	
+	.registerForm{
+		width: 40%;
+		height: 50px;
+		background: #2C353C;
+		color: #C9C9C9;
+		font-size: 13px;	
+		margin-bottom: 10px;
+		border: none;
+		outline: none;
+		padding: 0 20px;
+		display: inline-block;		
+	}
+
+
+	::placeholder{
+		color: #ffffff;
+		font-size: 13px;				
+	}
+	
+	::option{
+		color: #ffffff;
+		font-size: 13px;				
+	
+	}
+		
+	.registerSignupBtn{
+		width: 40%;
+		height: 50px;
+		background: #4CAF50;
+    	color: white;
+    	font-size: 20px;	
+		padding: 14px 20px;
+    	margin: 8px 0;
+    	border: none;
+    	cursor: pointer;
+    	float: left;    	
+    	opacity: 0.9;    		
+	}
+		
+	.registerSignupBtn:hover {
+    	opacity:1;
+	}
+		
+	.registerCancelBtn{
+		width: 40%;
+		height: 50px;
+		background: #f44336;
+    	color: white;
+    	font-size: 20px;
+    	padding: 14px 20px;
+    	margin: 8px 0;
+    	border: none;    		
+    	cursor: pointer;
+    	float: left;    	
+    	opacity: 0.9;
+	}
+		
+	.registerCancelBtn:hover {
+    	opacity:1;
+	}
+		
+
+	</style>
+	
+	<script>
+		function popupwindow(url, title, w, h) {
+		  var left = (screen.width/2)-(w/2);
+		  var top = (screen.height/2)-(h/2);
+		  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+		} 
+	</script>
+	
 </head>
 <body>
 
@@ -76,21 +150,26 @@
 			</div>
 		</div>
 	</nav> <!-- /.mainmenu-area -->
-            
-	
-	<section class="sec-padding contact-content appointment-content">
+
+
+
+	<section class="sec-padding">
+		
 		<div class="container">
-			<p><h2>Register</h2></p>				
-			
-			<form id="register-form" class="contact-form row" action="RegisterServlet" method="POST">
-				<div class="col-md-7">
-					<div class="row">
-						<div class="col-md-6">
-							<input type="text" name="fullname" placeholder="Full Name" required>
-                            <input type="password" name="password" placeholder="Password" required>
-                            <input type="text" name="company" placeholder="Company Name" required>
-                            <input type="text" name="address" placeholder="Address" required>                            
-                            <select class="select-input" name="state" id="state" required>
+				<p><h2>Register</h2></p>		
+				
+				<form action="RegisterServlet" method="POST">
+						
+							<input class="registerForm" type="text" name="fullname" placeholder="Full Name" minlength="3" required>
+							<input class="registerForm" type="email" name="email" placeholder="Email" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" required>
+							<input class="registerForm" type="password" name="password" placeholder="Password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be at least 8 characters and must contain at least one number & one uppercase letter" required>
+							<input class="registerForm" type="password" name="repassword" placeholder="Retype Password" required>
+                           	<input class="registerForm" type="text" name="company" placeholder="Company Name" minlength="3" required>
+                           	<input class="registerForm" type="text" name="phone" placeholder="Phone" placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="xxx-xxx-xxxx"required>
+                           	<input class="registerForm" type="text" name="address" placeholder="Address" minlength="5" required>                            
+                           	<input class="registerForm" type="text" name="city" placeholder="City" required>
+                            
+                            <select class="registerForm" name="state" id="state" required>
   								<option value="" selected="selected">State</option>
   								<option value="AL">Alabama</option>
   								<option value="AK">Alaska</option>
@@ -144,47 +223,36 @@
   								<option value="WI">Wisconsin</option>
   								<option value="WY">Wyoming</option>
 							</select>
-                            
-                            <div class="select-input-wrapper">
-								<select class="select-input" name="organization">
-									<option value="" selected="selected">Select your organization</option>
-                                    <option value="Pharma Supplier" >Pharma Supplier</option>
-									<option value="Pharma Client">Pharma Client</option>									
-								</select>
-							</div>							
-						</div>
-						
-						<div class="col-md-6">
-							<input type="email" name="email" placeholder="Email" required>
-							<input type="password" name="repassword" placeholder="Retype Password" required>
-                            <input type="tel" name="phone" placeholder="Phone" required>
-                            <input type="text" name="city" placeholder="City" required>
-                            <input type="number" name="zip" placeholder="Zipcode" required>
-							<div class="select-input-wrapper">
-								<select class="select-input" name="role">
-									<option value="" selected="selected">Select your role</option>
-                                    <option value="Patient Services Lead" >Patient Services Lead</option>
-									<option value="Market Access Lead">Market Access Lead</option>									
-								</select>
-							</div>							
-						</div>						
-					</div>					
-				</div>
-				
-				<div class="col-md-12"><button type="submit">Register</button></div>
-				<!-- 
-				<div class="col-md-12"><button type="reset">Reset</button></div>
-				 -->
-			</form>
+							<input class="registerForm" type="number" name="zip" placeholder="Zipcode" pattern="[0-9]{5}" required>
+							
+							<select class="registerForm" name="organization">
+								<option value="" selected="selected">Select your organization</option>
+                                   <option value="Pharma Supplier" >Pharma Supplier</option>
+								<option value="Pharma Client">Pharma Client</option>									
+							</select>
+							
+							<select class="registerForm" name="role">
+								<option value="" selected="selected">Select your role</option>
+                                   <option value="Patient Services Lead" >Patient Services Lead</option>
+								<option value="Market Access Lead">Market Access Lead</option>									
+							</select>
+							<p></p>
+		
+						<p>By registering, you are agreeing to our <a href="#" style="color:dodgerblue" onClick="popupwindow('terms.html','Terms & Conditions',600,700)">Terms & Conditions</a></p>
+                        <button type="submit" class="registerSignupBtn">Register</button>    
+                        <button type="reset"  class="registerCancelBtn">Cancel</button>
+                        																							
+					</form>				
+						   		
+					
+					</div>						
+				</div>				
 		</div>
-	</section>
+	</section>			
 	
-
-
-	<section class="footer-call-to-action">		
-	</section>
 	
-        <footer class="footer sec-padding">
+	
+    <footer class="footer sec-padding">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">

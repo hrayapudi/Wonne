@@ -1,13 +1,10 @@
 
 Registration
 ===================================
-1. When performing client-side validation, show the errors as info messages.
-2. Add validation for email & phone & zip & state.
-3. Can we add a drop down for states.
-4. When performing server-side validation, show errors as info messages.
+2. "Register" and "By registering" should be in black font
+3. Drop down font should be white, and white when we hover the choices
+4. When performing server-side validation, show errors in an error page.
 5. Once registration is successful, show the email as loginId and password.
-6. Place the Register & Reset button in the middle
-7. Reset should also rest drop down selection
 
 
 Login
@@ -20,6 +17,13 @@ Logout
 How will logout work, should user manually be able to logout?
 
 
-
-
 NOTES:
+
+
+Set-up
+===================================
+1. Download and install java 1.8 jdk
+2. Download and install Eclipse EE & then install AWS plugin
+3. Download and install Maven
+4. Download and install tomcat
+ 
