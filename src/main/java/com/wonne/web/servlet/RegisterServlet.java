@@ -31,7 +31,6 @@ public class RegisterServlet extends HttpServlet {
         if( !isValid ) return;
         
         boolean isRegistered= service.register(bean);
-        
         if( !isRegistered ){
             response.sendRedirect("/Register.html");
             return;
@@ -42,96 +41,24 @@ public class RegisterServlet extends HttpServlet {
     }
     
     
-     protected final boolean validate( RegisterBean bean, HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+    //If Validation fails, populate form with fields that did pass the check
+    protected final boolean validate( RegisterBean bean, HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         
-         if( bean == null ){
-            request.setAttribute("error", "Failed to extract registration form inputs.");
+        ValidationResult result = RegisterValidation.validate( bean );
+        boolean validationPassed= result.isValid( );
+         
+        if( !validationPassed ){
+            request.setAttribute("error", result.getReason( ));
             request.getRequestDispatcher("/Register.html").forward(request, response);
             return false;
         }
-        
-        if( !isValid(bean.getFullName()) ){
-            request.setAttribute("error", "Full name is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        if( !isValid(bean.getEmail()) ){
-            request.setAttribute("error", "Email is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        
-        if( !isValid(bean.getPassword()) ){
-            request.setAttribute("error", "Password is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        if( !bean.getPassword().equals(bean.getRepassword()) ){
-            request.setAttribute("error", "Passwords do not match!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        if( !isValid(bean.getCompanyName()) ){
-            request.setAttribute("error", "Company name is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-                
-        if( !isValid(bean.getPhone()) ){
-            request.setAttribute("error", "Phone number is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-                
-        if( !isValid(bean.getAddress()) ){
-            request.setAttribute("error", "Address is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-
-        if( !isValid(bean.getCity()) ){
-            request.setAttribute("error", "City is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        
-        if( !isValid(bean.getState()) ){
-            request.setAttribute("error", "State is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        
-        if( !isValid(bean.getZip()) ){
-            request.setAttribute("error", "Zipcode is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        
-        if( !isValid(bean.getOrganization()) ){
-            request.setAttribute("error", "Organization selection is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
-        if( !isValid(bean.getRole()) ){
-            request.setAttribute("error", "Role selection is invalid!");
-            request.getRequestDispatcher("/Register.html").forward(request, response);
-            return false;
-        }
-        
         
         return true;
         
     }
      
     
+   
     protected final RegisterBean parseInput( HttpServletRequest request ){
         
         RegisterBean bean       = null;
@@ -162,8 +89,5 @@ public class RegisterServlet extends HttpServlet {
         return bean;
     }
 
-   
-    
-    
     
 }

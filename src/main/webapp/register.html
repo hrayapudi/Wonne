@@ -26,8 +26,20 @@
 		padding: 0 20px;
 		display: inline-block;		
 	}
-
-
+	
+	.dropdown-content{
+		width: 40%;
+		height: 50px;
+		background: #2C353C;
+    	color: #ffffff;
+    	font-size: 13px;
+    	margin-bottom: 10px;
+		border: none;
+		outline: none;
+		padding: 0 20px;
+    	display: inline-block;    	
+	}
+	
 	::placeholder{
 		color: #ffffff;
 		font-size: 13px;				
@@ -36,9 +48,13 @@
 	::option{
 		color: #ffffff;
 		font-size: 13px;				
-	
 	}
-		
+	
+	.register-sec-padding{
+		padding: 50px 0;
+	}
+	
+			
 	.registerSignupBtn{
 		width: 40%;
 		height: 50px;
@@ -153,10 +169,10 @@
 
 
 
-	<section class="sec-padding">
+	<section class="register-sec-padding">
 		
 		<div class="container">
-				<p><h2>Register</h2></p>		
+				<p><h1 style="color:black;">Register</h1></p>		
 				
 				<form action="RegisterServlet" method="POST">
 						
@@ -169,7 +185,7 @@
                            	<input class="registerForm" type="text" name="address" placeholder="Address" minlength="5" required>                            
                            	<input class="registerForm" type="text" name="city" placeholder="City" required>
                             
-                            <select class="registerForm" name="state" id="state" required>
+                            <select class="dropdown-content" name="state" id="state" required>
   								<option value="" selected="selected">State</option>
   								<option value="AL">Alabama</option>
   								<option value="AK">Alaska</option>
@@ -223,22 +239,24 @@
   								<option value="WI">Wisconsin</option>
   								<option value="WY">Wyoming</option>
 							</select>
+							
+							
 							<input class="registerForm" type="number" name="zip" placeholder="Zipcode" pattern="[0-9]{5}" required>
 							
-							<select class="registerForm" name="organization">
+							<select class="dropdown-content" name="organization">
 								<option value="" selected="selected">Select your organization</option>
-                                   <option value="Pharma Supplier" >Pharma Supplier</option>
+                                <option value="Pharma Supplier" >Pharma Supplier</option>
 								<option value="Pharma Client">Pharma Client</option>									
 							</select>
 							
-							<select class="registerForm" name="role">
+							<select class="dropdown-content" name="role">
 								<option value="" selected="selected">Select your role</option>
-                                   <option value="Patient Services Lead" >Patient Services Lead</option>
+                                <option value="Patient Services Lead" >Patient Services Lead</option>
 								<option value="Market Access Lead">Market Access Lead</option>									
 							</select>
 							<p></p>
 		
-						<p>By registering, you are agreeing to our <a href="#" style="color:dodgerblue" onClick="popupwindow('terms.html','Terms & Conditions',600,700)">Terms & Conditions</a></p>
+						<p style="color:black;">By registering, you are agreeing to our <a href="#" style="color:dodgerblue" onClick="popupwindow('terms.html','Terms & Conditions',600,700)">Terms & Conditions</a></p>
                         <button type="submit" class="registerSignupBtn">Register</button>    
                         <button type="reset"  class="registerCancelBtn">Cancel</button>
                         																							
@@ -250,14 +268,14 @@
 		</div>
 	</section>			
 	
-	
+
 	
     <footer class="footer sec-padding">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
 					<div class="footer-widget about-widget">
-                                            <h3 class="title">Contact</h3>
+                        <h3 class="title">Contact</h3>
 						<ul class="contact">
 							<li><i class="fa fa-map-marker"></i> <span>10 Sip Ave, Somerset NJ 07080</span></li>
 							<li><i class="fa fa-phone"></i> <span>(1800) 456-0900</span></li>

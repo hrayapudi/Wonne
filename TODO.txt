@@ -1,10 +1,10 @@
 
 Registration
 ===================================
-2. "Register" and "By registering" should be in black font
-3. Drop down font should be white, and white when we hover the choices
-4. When performing server-side validation, show errors in an error page.
-5. Once registration is successful, show the email as loginId and password.
+1. Server side should repeat all validation done on client side
+2. When performing server-side validation, how do we show errors?
+3. When performing server-side validation, populate the fields that passed validation (don't force the user to fill them again)
+4. Once registration is successful, forward to the login page and show the email as loginId and password.
 
 
 Login
