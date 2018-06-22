@@ -5,18 +5,28 @@ Registration
 2. When performing server-side validation, how do we show errors?
 3. When performing server-side validation, populate the fields that passed validation (don't force the user to fill them again)
 4. Once registration is successful, forward to the login page and show the email as loginId and password.
+5. Do we need to email user with login and password?
 
 
 Login
 ===================================
-Work on Login Page
-
+1. Work on Login Page
+2. How will we remember that user is logged in
+3. How will be show that user is logged in
+4. Create a table to track login activity (Last logged in, times logged in etc)
 
 Logout
 ===================================
 How will logout work, should user manually be able to logout?
 
 
+Admin Page
+===================================
+If USer is an admin, he can see link to admin page where he can:
+	a) See all the registered users
+	b)
+	
+	
 NOTES:
 
 
