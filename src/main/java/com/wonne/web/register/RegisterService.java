@@ -28,7 +28,7 @@ public final class RegisterService {
         int updateResult        = -1;
         
         try{ 
-                       
+                                   
             pStatement.setString( 1, bean.getFullName( ) );
             pStatement.setString( 2, bean.getEmail( ) );
             pStatement.setString( 3, bean.getPassword( ) );

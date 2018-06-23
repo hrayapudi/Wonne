@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false"%>
+<%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.register.RegisterValidator" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,104 +180,104 @@
 				
 				<form action="RegisterServlet" method="POST">
 						
-							<input class="registerForm" type="text" name="fullname" placeholder="Full Name" minlength="3" required>
-							<input class="registerForm" type="email" name="email" placeholder="Email" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" required>
-							<input class="registerForm" type="password" name="password" placeholder="Password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be at least 8 characters and must contain at least one number & one uppercase letter" required>
-							<input class="registerForm" type="password" name="repassword" placeholder="Retype Password" required>
-                           	<input class="registerForm" type="text" name="company" placeholder="Company Name" minlength="3" required>
-                           	<input class="registerForm" type="text" name="phone" placeholder="Phone" placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="xxx-xxx-xxxx"required>
-                           	<input class="registerForm" type="text" name="address" placeholder="Address" minlength="5" required>                            
-                           	<input class="registerForm" type="text" name="city" placeholder="City" required>
+							<input class="registerForm" type="text" 	name="${RegisterItem.FULL_NAME.getIName( )}" 	placeholder="${RegisterItem.FULL_NAME.getHolder()}" minlength="${RegisterItem.FULL_NAME.getMinLength()}" value="${param[RegisterItem.FULL_NAME.getIName( )]}" required >
+							<input class="registerForm" type="email" 	name="${RegisterItem.EMAIL.getIName( )}" 		placeholder="${RegisterItem.EMAIL.getHolder()}" 	minlength="${RegisterItem.EMAIL.getMinLength()}" 	value="${param[RegisterItem.EMAIL.getIName( )]}" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" required>
+							<input class="registerForm" type="password" name="${RegisterItem.PASSWORD.getIName( )}" 	placeholder="${RegisterItem.PASSWORD.getHolder()}" 	minlength="${RegisterItem.PASSWORD.getMinLength()}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be at least 8 characters and must contain at least one number & one uppercase letter" required>
+							<input class="registerForm" type="password" name="${RegisterItem.REPASSWORD.getIName( )}" 	placeholder="${RegisterItem.REPASSWORD.getHolder()}" minlength="${RegisterItem.REPASSWORD.getMinLength()}" required>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.COMPANY.getIName( )}" 		placeholder="${RegisterItem.COMPANY.getHolder()}" 	minlength="${RegisterItem.COMPANY.getMinLength()}" value="${param[RegisterItem.COMPANY.getIName( )]}" required>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.PHONE.getIName( )}" 		placeholder="${RegisterItem.PHONE.getHolder()}" 	minlength="${RegisterItem.PHONE.getMinLength()}" value="${param[RegisterItem.PHONE.getIName( )]}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="xxx-xxx-xxxx" required>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.ADDRESS.getIName( )}" 		placeholder="${RegisterItem.ADDRESS.getHolder()}" 	minlength="${RegisterItem.ADDRESS.getMinLength()}" value="${param[RegisterItem.ADDRESS.getIName( )]}" required>                            
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.CITY.getIName( )}" 		placeholder="${RegisterItem.CITY.getHolder()}" 		minlength="${RegisterItem.CITY.getMinLength()}" value="${param[RegisterItem.CITY.getIName( )]}" required>
                             
-                            <select class="dropdown-content" name="state" id="state" required>
+                            <select class="dropdown-content" name="${RegisterItem.STATE.getIName( )}" required>
   								<option value="" selected="selected">State</option>
-  								<option value="AL">Alabama</option>
-  								<option value="AK">Alaska</option>
-  								<option value="AZ">Arizona</option>
-  								<option value="AR">Arkansas</option>
-  								<option value="CA">California</option>
-  								<option value="CO">Colorado</option>
-  								<option value="CT">Connecticut</option>
-  								<option value="DE">Delaware</option>
-  								<option value="DC">District Of Columbia</option>
-  								<option value="FL">Florida</option>
-  								<option value="GA">Georgia</option>
-  								<option value="HI">Hawaii</option>
-  								<option value="ID">Idaho</option>
-  								<option value="IL">Illinois</option>
-  								<option value="IN">Indiana</option>
-  								<option value="IA">Iowa</option>
-  								<option value="KS">Kansas</option>
-  								<option value="KY">Kentucky</option>
-  								<option value="LA">Louisiana</option>
-  								<option value="ME">Maine</option>
-  								<option value="MD">Maryland</option>
-  								<option value="MA">Massachusetts</option>
-  								<option value="MI">Michigan</option>
-  								<option value="MN">Minnesota</option>
-  								<option value="MS">Mississippi</option>
-  								<option value="MO">Missouri</option>
-  								<option value="MT">Montana</option>
-  								<option value="NE">Nebraska</option>
-  								<option value="NV">Nevada</option>
-  								<option value="NH">New Hampshire</option>
-  								<option value="NJ">New Jersey</option>
-  								<option value="NM">New Mexico</option>
-  								<option value="NY">New York</option>
-  								<option value="NC">North Carolina</option>
-  								<option value="ND">North Dakota</option>
-  								<option value="OH">Ohio</option>
-  								<option value="OK">Oklahoma</option>
-  								<option value="OR">Oregon</option>
-  								<option value="PA">Pennsylvania</option>
-  								<option value="RI">Rhode Island</option>
-  								<option value="SC">South Carolina</option>
-  								<option value="SD">South Dakota</option>
-  								<option value="TN">Tennessee</option>
-  								<option value="TX">Texas</option>
-  								<option value="UT">Utah</option>
-  								<option value="VT">Vermont</option>
-  								<option value="VA">Virginia</option>
-  								<option value="WA">Washington</option>
-  								<option value="WV">West Virginia</option>
-  								<option value="WI">Wisconsin</option>
-  								<option value="WY">Wyoming</option>
+  								<option value="AL" ${param[RegisterItem.STATE.getIName( )] == 'AL' ? 'selected' : ''}>Alabama</option>
+  								<option value="AK" ${param[RegisterItem.STATE.getIName( )] == 'AK' ? 'selected' : ''}>Alaska</option>
+  								<option value="AZ" ${param[RegisterItem.STATE.getIName( )] == 'AZ' ? 'selected' : ''}>Arizona</option>
+  								<option value="AR" ${param[RegisterItem.STATE.getIName( )] == 'AR' ? 'selected' : ''}>Arkansas</option>
+  								<option value="CA" ${param[RegisterItem.STATE.getIName( )] == 'CA' ? 'selected' : ''}>California</option>
+  								<option value="CO" ${param[RegisterItem.STATE.getIName( )] == 'CO' ? 'selected' : ''}>Colorado</option>
+  								<option value="CT" ${param[RegisterItem.STATE.getIName( )] == 'CT' ? 'selected' : ''}>Connecticut</option>
+  								<option value="DE" ${param[RegisterItem.STATE.getIName( )] == 'DE' ? 'selected' : ''}>Delaware</option>
+  								<option value="DC" ${param[RegisterItem.STATE.getIName( )] == 'DC' ? 'selected' : ''}>District Of Columbia</option>
+  								<option value="FL" ${param[RegisterItem.STATE.getIName( )] == 'FL' ? 'selected' : ''}>Florida</option>
+  								<option value="GA" ${param[RegisterItem.STATE.getIName( )] == 'GA' ? 'selected' : ''}>Georgia</option>
+  								<option value="HI" ${param[RegisterItem.STATE.getIName( )] == 'HI' ? 'selected' : ''}> Hawaii</option>
+  								<option value="ID" ${param[RegisterItem.STATE.getIName( )] == 'ID' ? 'selected' : ''}>Idaho</option>
+  								<option value="IL" ${param[RegisterItem.STATE.getIName( )] == 'IL' ? 'selected' : ''}>Illinois</option>
+  								<option value="IN" ${param[RegisterItem.STATE.getIName( )] == 'IN' ? 'selected' : ''}>Indiana</option>
+  								<option value="IA" ${param[RegisterItem.STATE.getIName( )] == 'IA' ? 'selected' : ''}>Iowa</option>
+  								<option value="KS" ${param[RegisterItem.STATE.getIName( )] == 'KS' ? 'selected' : ''}>Kansas</option>
+  								<option value="KY" ${param[RegisterItem.STATE.getIName( )] == 'KY' ? 'selected' : ''}>Kentucky</option>
+  								<option value="LA" ${param[RegisterItem.STATE.getIName( )] == 'LA' ? 'selected' : ''}>Louisiana</option>
+  								<option value="ME" ${param[RegisterItem.STATE.getIName( )] == 'ME' ? 'selected' : ''}>Maine</option>
+  								<option value="MD" ${param[RegisterItem.STATE.getIName( )] == 'MD' ? 'selected' : ''}>Maryland</option>
+  								<option value="MA" ${param[RegisterItem.STATE.getIName( )] == 'MA' ? 'selected' : ''}>Massachusetts</option>
+  								<option value="MI" ${param[RegisterItem.STATE.getIName( )] == 'MI' ? 'selected' : ''}>Michigan</option>
+  								<option value="MN" ${param[RegisterItem.STATE.getIName( )] == 'MN' ? 'selected' : ''}>Minnesota</option>
+  								<option value="MS" ${param[RegisterItem.STATE.getIName( )] == 'MS' ? 'selected' : ''}> Mississippi</option>
+  								<option value="MO" ${param[RegisterItem.STATE.getIName( )] == 'MO' ? 'selected' : ''}>Missouri</option>
+  								<option value="MT" ${param[RegisterItem.STATE.getIName( )] == 'MT' ? 'selected' : ''}>Montana</option>
+  								<option value="NE" ${param[RegisterItem.STATE.getIName( )] == 'NE' ? 'selected' : ''}>Nebraska</option>
+  								<option value="NV" ${param[RegisterItem.STATE.getIName( )] == 'NV' ? 'selected' : ''}>Nevada</option>
+  								<option value="NH" ${param[RegisterItem.STATE.getIName( )] == 'NH' ? 'selected' : ''}>New Hampshire</option>
+  								<option value="NJ" ${param[RegisterItem.STATE.getIName( )] == 'NJ' ? 'selected' : ''}>New Jersey</option>
+  								<option value="NM" ${param[RegisterItem.STATE.getIName( )] == 'NM' ? 'selected' : ''}>New Mexico</option>
+  								<option value="NY" ${param[RegisterItem.STATE.getIName( )] == 'NY' ? 'selected' : ''}>New York</option>
+  								<option value="NC" ${param[RegisterItem.STATE.getIName( )] == 'NC' ? 'selected' : ''}>North Carolina</option>
+  								<option value="ND" ${param[RegisterItem.STATE.getIName( )] == 'ND' ? 'selected' : ''}>North Dakota</option>
+  								<option value="OH" ${param[RegisterItem.STATE.getIName( )] == 'OH' ? 'selected' : ''}>Ohio</option>
+  								<option value="OK" ${param[RegisterItem.STATE.getIName( )] == 'OK' ? 'selected' : ''}>Oklahoma</option>
+  								<option value="OR" ${param[RegisterItem.STATE.getIName( )] == 'OR' ? 'selected' : ''}>Oregon</option>
+  								<option value="PA" ${param[RegisterItem.STATE.getIName( )] == 'PA' ? 'selected' : ''}>Pennsylvania</option>
+  								<option value="RI" ${param[RegisterItem.STATE.getIName( )] == 'RI' ? 'selected' : ''}>Rhode Island</option>
+  								<option value="SC" ${param[RegisterItem.STATE.getIName( )] == 'SC' ? 'selected' : ''}>South Carolina</option>
+  								<option value="SD" ${param[RegisterItem.STATE.getIName( )] == 'SD' ? 'selected' : ''}>South Dakota</option>
+  								<option value="TN" ${param[RegisterItem.STATE.getIName( )] == 'TN' ? 'selected' : ''}>Tennessee</option>
+  								<option value="TX" ${param[RegisterItem.STATE.getIName( )] == 'TX' ? 'selected' : ''}>Texas</option>
+  								<option value="UT" ${param[RegisterItem.STATE.getIName( )] == 'UT' ? 'selected' : ''}>Utah</option>
+  								<option value="VT" ${param[RegisterItem.STATE.getIName( )] == 'VT' ? 'selected' : ''}>Vermont</option>
+  								<option value="VA" ${param[RegisterItem.STATE.getIName( )] == 'VA' ? 'selected' : ''}>Virginia</option>
+  								<option value="WA" ${param[RegisterItem.STATE.getIName( )] == 'WA' ? 'selected' : ''}>Washington</option>
+  								<option value="WV" ${param[RegisterItem.STATE.getIName( )] == 'WV' ? 'selected' : ''}>West Virginia</option>
+  								<option value="WI" ${param[RegisterItem.STATE.getIName( )] == 'WI' ? 'selected' : ''}>Wisconsin</option>
+  								<option value="WY" ${param[RegisterItem.STATE.getIName( )] == 'WY' ? 'selected' : ''}>Wyoming</option>
 							</select>
 							
 							
-							<input class="registerForm" type="number" name="zip" placeholder="Zipcode" pattern="[0-9]{5}" required>
+							<input class="registerForm" type="number" name="${RegisterItem.ZIPCODE.getIName( )}" placeholder="${RegisterItem.ZIPCODE.getHolder()}" value="${param[RegisterItem.ZIPCODE.getIName( )]}" minlength="${RegisterItem.ZIPCODE.getMinLength()}" pattern="[0-9]{5}" required>
 							
-							<select class="dropdown-content" name="organization">
+							<select class="dropdown-content" name="${RegisterItem.ORGANIZATION.getIName( )}" required>
 								<option value="" selected="selected">Select your organization</option>
-                                <option value="Pharma Supplier" >Pharma Supplier</option>
-								<option value="Pharma Client">Pharma Client</option>									
+                                <option value="Pharma Supplier"  ${param[RegisterItem.ORGANIZATION.getIName( )] == 'Pharma Supplier' ? 'selected' : ''}>Pharma Supplier</option>
+								<option value="Pharma Client" ${param[RegisterItem.ORGANIZATION.getIName( )] == 'Pharma Client' ? 'selected' : ''}>Pharma Client</option>									
 							</select>
 							
-							<select class="dropdown-content" name="role">
+							<select class="dropdown-content" name="${RegisterItem.ROLE.getIName( )}" required>
 								<option value="" selected="selected">Select your role</option>
-                                <option value="Patient Services Lead" >Patient Services Lead</option>
-								<option value="Market Access Lead">Market Access Lead</option>									
+                                <option value="Patient Services Lead" ${param[RegisterItem.ROLE.getIName( )] == 'Patient Services Lead' ? 'selected' : ''} >Patient Services Lead</option>
+								<option value="Market Access Lead" ${param[RegisterItem.ROLE.getIName( )] == 'Market Access Lead' ? 'selected' : ''} >Market Access Lead</option>									
 							</select>
 							<p></p>
 		
-						<p style="color:black;">By registering, you are agreeing to our <a href="#" style="color:dodgerblue" onClick="popupwindow('terms.html','Terms & Conditions',600,700)">Terms & Conditions</a></p>
+							<p style="color:red;"><strong>${requestScope.errorMessage}</strong></p>
+						
+							
                         <button type="submit" class="registerSignupBtn">Register</button>    
                         <button type="reset"  class="registerCancelBtn">Cancel</button>
-                        																							
+                                                																					
 					</form>				
-						   	
-				   	<%
-    				if( null != request.getAttribute("errorMessage") ){
-        				out.println( request.getAttribute("errorMessage") );
-    				}
-					%>	
+					</div>
 					
-					</div>						
-				</div>				
+					<div class="container">
+						<p style="color:black;">By registering, you are agreeing to our <a href="#" style="color:dodgerblue" onClick="popupwindow('terms.html','Terms & Conditions',600,700)">Terms & Conditions</a></p>
+					</div>											
+				
+				</div>			
+					
 		</div>
 	</section>			
 	
-
 	
     <footer class="footer sec-padding">
 		<div class="container">

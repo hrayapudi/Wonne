@@ -20,22 +20,23 @@ public final class ValidationResult{
     }
     
 
-    public final boolean isValid( ) {
+    public final boolean isValid( ){
         return isValid;
     }
-
-    public final String getReason( ) {
+    
+    
+    public final String getReason( ){
         return reason;
     }
 
+    
     @Override
-    public String toString( ) {
+    public final String toString( ){
         StringBuilder builder = new StringBuilder( );
-        builder.append( "ValidationResult [isValid=" );
-        builder.append( isValid );
-        builder.append( ", reason=" );
-        builder.append( reason );
-        builder.append( "]" );
+        builder.append( "Result [Valid=" ).append( isValid );
+        builder.append( ", Reason=" ).append( reason ).append( "]" );
         return builder.toString( );
     }
+
+
 }
