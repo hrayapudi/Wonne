@@ -9,16 +9,23 @@ import static com.wonne.web.util.WonneUtil.*;
 
 public class LogoutServlet extends HttpServlet {
     
-    private static final long serialVersionUID = 1L;
-
-
+    private static final long serialVersionUID  = 1L;
+    
     @Override
     public void init() throws ServletException {
         super.init();
     }
     
     @Override
-    protected final void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //invalidate the session if exists
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+        
+        response.sendRedirect( request.getContextPath() + LOGIN_PAGE );
     }
   
     

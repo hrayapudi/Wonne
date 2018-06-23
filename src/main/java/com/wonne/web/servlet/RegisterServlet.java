@@ -4,19 +4,20 @@ import java.io.*;
 import org.slf4j.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import com.wonne.web.database.*;
 import com.wonne.web.register.*;
 
+import static com.wonne.web.util.WonneUtil.*;
 import static com.wonne.web.register.RegisterItem.*;
 
 
 public class RegisterServlet extends HttpServlet {
     
-    private RegisterService service;
-    
     private static final long serialVersionUID  = 1L;
-    private static final String ERR_MSG_TAG     = "errorMessage";
     private static final String FORM_ERR_PAGE   = "/register.jsp";
     private static final String FORM_VALID_PAGE = "/RegistrationSuccess.html";
+    private static final String DUP_USER_MSG    = " is already registered! Please login.";
     private final static String NAME            = RegisterServlet.class.getSimpleName( );
     private final static Logger LOGGER          = LoggerFactory.getLogger( NAME );
     
@@ -24,7 +25,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.service = new RegisterService();
     }
     
 
@@ -35,6 +35,21 @@ public class RegisterServlet extends HttpServlet {
         ValidationResult result = RegisterValidator.validate( bean );
         if( !result.isValid( ) ){
             request.setAttribute( ERR_MSG_TAG, result.getReason( ));
+            request.getRequestDispatcher(FORM_ERR_PAGE).forward(request, response);
+            return;
+        }
+                
+        DBService service       = (DBService) getServletContext( ).getAttribute( DB_SERVICE_TAG );
+        if( service == null ){
+            request.setAttribute( ERR_MSG_TAG, DB_SERVICE_ERROR);
+            request.getRequestDispatcher(FORM_ERR_PAGE).forward(request, response);
+            return;
+        }
+        
+        String email            = bean.getEmail( );
+        boolean alreadyExists   = service.userExists( email );
+        if( alreadyExists ){
+            request.setAttribute( ERR_MSG_TAG, email + DUP_USER_MSG);
             request.getRequestDispatcher(FORM_ERR_PAGE).forward(request, response);
             return;
         }

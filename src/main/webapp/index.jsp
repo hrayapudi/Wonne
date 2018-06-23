@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false"%>
+<%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.util.WonneUtil" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +24,7 @@
             <div class="container">
 		<div class="left-text pull-left">
                     <p>
-                      <a href="index.html">
+                      <a href="index.jsp">
                         <img src="img/resources/logo.png" alt="Wonne Logo"/>
                     </a>
                     </p>
@@ -42,10 +46,10 @@
 			<div class="navigation pull-left">
 				<div class="nav-header">
 					<ul>
-                                            <li><a href="about.html">About Us</a></li>			
-                                            <li><a href="foundation.html">Wonne Foundation</a></li>
-                                            <li><a href="markets.html">Wonne Markets</a></li>
-                                            <li class="dropdown">
+                    	<li><a href="about.html">About Us</a></li>			
+                        <li><a href="foundation.html">Wonne Foundation</a></li>
+                        <li><a href="markets.html">Wonne Markets</a></li>
+                        <li class="dropdown">
 							<a href="services.html">Products</a>
 							<ul class="submenu">
 								<li><a href="health-care.html">Primary Halth Care</a></li>
@@ -57,10 +61,10 @@
 								<li><a href="dental.html">Dental Treatment</a></li>
 								<li><a href="service-details.html">single tabbed version</a></li>
 							</ul>
-                                            </li>
-                                            <li><a href="register.jsp">Register</a></li>	
-                                            <li><a href="blog.html">Blog</a></li>	
-                                            <li><a href="faq.html">FAQ</a></li>                                                                                                                    
+                       	</li>
+                        <li><a href="register.jsp">Register</a></li>	
+                        <li><a href="blog.html">Blog</a></li>	
+                        <li><a href="faq.html">FAQ</a></li>                                                                                                                    
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -79,10 +83,11 @@
 
 	<section class="rev_slider_wrapper">
 		<div id="slider1" class="rev_slider"  data-version="5.0">
+			
 			<ul>
-                            <li data-transition="parallaxvertical">
-                                <img src="img/slides/yoga1.png"  alt="" width="1920" height="705" data-bgposition="top center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="1" >
-                                    <div class="tp-caption sfr tp-resizeme thm-banner-h1 heavy" 
+            	<li data-transition="parallaxvertical">
+                <img src="img/slides/yoga1.png"  alt="" width="1920" height="705" data-bgposition="top center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="1" >
+                <div class="tp-caption sfr tp-resizeme thm-banner-h1 heavy" 
 				        data-x="left" data-hoffset="0" 
 				        data-y="top" data-voffset="75" 
 				        data-whitespace="nowrap"
@@ -158,25 +163,51 @@
 	
 	<section class="home-appointment-form">
 		<div class="container">
-			<div class="heading">
-				<h3>Login</h3>
-			</div>
-                  	<div class="form-grp clearfix">
-				<form action="#" class="clearfix contact-form" id="appointment-form">
-					<div class="single-form">
-						<input type="text" placeholder="Email" name="email">
+           
+            <c:choose>
+    			<c:when test="${sessionScope[WonneUtil.NAME_SESSION_TAG] == null}">
+        			<div class="heading">
+						<h3>Login<h3>		
+            		</div>
+            		
+            		<div class="form-grp clearfix">            
+						<form class="clearfix" id="appointment-form" action="LoginServlet" method="POST">
+							<div class="single-form">
+								<input type="email" name="${RegisterItem.EMAIL.getIName( )}" 		placeholder="${RegisterItem.EMAIL.getHolder()}" required>
+							</div>
+                    		<div class="single-form">
+								<input type="password" name="${RegisterItem.PASSWORD.getIName( )}" 		placeholder="${RegisterItem.PASSWORD.getHolder()}" required>
+							</div>
+							<div class="single-form">
+								<button name="login" type="submit">Login</button>
+							</div>
+                    		<div class="single-form">
+								<button name="forgot" type="submit">Forgot Password?</button>
+							</div>
+						</form>			
 					</div>
-                                        <div class="single-form">
-						<input type="text" placeholder="Password" name="password">
+				</c:when>
+				
+				<c:otherwise>
+        			<div class="heading">
+						<h3>${sessionScope[WonneUtil.NAME_SESSION_TAG]}<h3>		
+            		</div>
+            	
+					<div class="form-grp clearfix">            
+						<form class="clearfix" id="appointment-form" action="LogoutServlet" method="POST">
+							<div class="single-form">
+								<h3>Welcome back, thank you for being a part of our story.<h3>						
+							</div>
+							<div class="single-form">
+								<h3><h3>						
+							</div>
+							<div class="single-form">
+								<button type="submit">Logout</button>
+							</div>
+						</form>			
 					</div>
-					<div class="single-form">
-						<button type="submit">Login</button>
-					</div>
-                                        <div class="single-form">
-						<button type="submit">Forgot Password?</button>
-					</div>
-				</form>
-			</div>
+    			</c:otherwise>
+			</c:choose>
 		</div>
 	</section>       
         
@@ -185,13 +216,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-4">
-					<h2>Launched in <b>2018</b> <br>we are bringing together suppliers and customers<br></h2>
-					<a href="register.jsp" class="thm-btn inverse">Join us</a>
+					<h2>Launched in <b>2018</b> <br>we are bringing together suppliers and customers<br></h2>					
 				</div>
 				<div class="col-lg-6 col-md-8">
 					<div class="single-fact">
 						<div class="icon-box">
-                                                    <span class="timer" data-from="0" data-to="15" data-speed="5000" data-refresh-interval="50">15</span>
+                        	<span class="timer" data-from="0" data-to="15" data-speed="5000" data-refresh-interval="50">15</span>
 						</div>						
 						<p>Initiatives Funded</p>
 					</div>
