@@ -8,8 +8,8 @@ DONE
 
 Registration
 ===================================
-3. Password is stored as text
 4. Once registration is successful, forward to the login page and show the email as loginId and password.
+3. Password is stored as text
 5. Do we need to email user with login and password?
 6. Make sure we can see logs
 
@@ -23,12 +23,16 @@ Login
 
 Logout
 ===================================
-How will logout work, should user manually be able to logout?
+1. How will logout work, should user manually be able to logout?
+2. Work on forgot password page
 
 Cancel
 ===================================
 1. Cancel button doesn't reset fields (after we have submitted the form)
 
+UI
+===================================
+1. Should I replace the second slide image?
 
 
 Admin Page

@@ -2,6 +2,7 @@
 <%@ page isELIgnored="false"%>
 <%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.util.WonneUtil" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,16 +51,9 @@
                         <li><a href="foundation.html">Wonne Foundation</a></li>
                         <li><a href="markets.html">Wonne Markets</a></li>
                         <li class="dropdown">
-							<a href="services.html">Products</a>
+							<a href="#">Products</a>
 							<ul class="submenu">
-								<li><a href="health-care.html">Primary Halth Care</a></li>
-								<li><a href="heart-treatment.html">Heart Treatment</a></li>
-								<li><a href="neuro.html">Neurology Treatment</a></li>
-								<li><a href="eye.html">Eye Treatment</a></li>
-								<li><a href="kidney.html">Kidney Treatment</a></li>
-								<li><a href="bone.html">Bone Treatment</a></li>
-								<li><a href="dental.html">Dental Treatment</a></li>
-								<li><a href="service-details.html">single tabbed version</a></li>
+								<li><a href="service-details.html">Demo</a></li>
 							</ul>
                        	</li>
                         <li><a href="register.jsp">Register</a></li>	
@@ -163,9 +157,28 @@
 	
 	<section class="home-appointment-form">
 		<div class="container">
-           
+                      
             <c:choose>
-    			<c:when test="${sessionScope[WonneUtil.NAME_SESSION_TAG] == null}">
+    			<c:when test="${sessionScope[WonneUtil.LOGIN_STATUS_TAG] == WonneUtil.SERVLET_SUCCESS}">
+    				<div class="heading">
+						<h3>${sessionScope[WonneUtil.LOGIN_MSG_TAG]}<h3>		
+            		</div>
+            	
+					<div class="form-grp clearfix">            
+						<form class="clearfix" id="appointment-form" action="LogoutServlet" method="POST">
+							<div class="single-form">
+								<h3>Welcome back, thank you for being a part of our story.<h3>						
+							</div>
+							<div class="single-form">
+								<h3><h3>						
+							</div>
+							<div class="single-form">
+								<button type="submit">Logout</button>
+							</div>
+						</form>			
+					</div>
+    			</c:when>
+				<c:otherwise>
         			<div class="heading">
 						<h3>Login<h3>		
             		</div>
@@ -184,29 +197,11 @@
                     		<div class="single-form">
 								<button name="forgot" type="submit">Forgot Password?</button>
 							</div>
-						</form>			
+						</form>
+						<p></p>	
+						<p style="color:red;"><strong>${sessionScope[WonneUtil.LOGIN_MSG_TAG]}</strong></p>	
 					</div>
-				</c:when>
-				
-				<c:otherwise>
-        			<div class="heading">
-						<h3>${sessionScope[WonneUtil.NAME_SESSION_TAG]}<h3>		
-            		</div>
-            	
-					<div class="form-grp clearfix">            
-						<form class="clearfix" id="appointment-form" action="LogoutServlet" method="POST">
-							<div class="single-form">
-								<h3>Welcome back, thank you for being a part of our story.<h3>						
-							</div>
-							<div class="single-form">
-								<h3><h3>						
-							</div>
-							<div class="single-form">
-								<button type="submit">Logout</button>
-							</div>
-						</form>			
-					</div>
-    			</c:otherwise>
+				</c:otherwise>
 			</c:choose>
 		</div>
 	</section>       

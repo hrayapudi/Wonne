@@ -27,8 +27,7 @@ public class LoginServlet extends HttpServlet {
         
         DBService service   = (DBService) getServletContext( ).getAttribute( DB_SERVICE_TAG );
         if( service == null ){
-            request.setAttribute( ERR_MSG_TAG, DB_SERVICE_ERROR);
-            request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
+            handleError( DB_SERVICE_ERROR, request, response );
             return;
         }
         
@@ -37,8 +36,7 @@ public class LoginServlet extends HttpServlet {
         String fullName     = service.userPasswordMatch( email, password );
         boolean userExists  = isValid( fullName );
         if( !userExists ) {
-            request.setAttribute( ERR_MSG_TAG, LOGIN_ERR_MSGE);
-            request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
+            handleError( LOGIN_ERR_MSGE, request, response );
             return;
         }
         
@@ -51,10 +49,22 @@ public class LoginServlet extends HttpServlet {
         //generate a new session
         HttpSession newSession = request.getSession(true);
         newSession.setMaxInactiveInterval( _10_MINUTES_IN_SECS );
-        newSession.setAttribute(NAME_SESSION_TAG, fullName);
-        response.sendRedirect( request.getContextPath() + LOGIN_PAGE );
-        
+        handleSuccess( fullName, request, response );
+                
     }
-      
+     
+    
+    protected void handleSuccess( String fullName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getSession( ).setAttribute( LOGIN_STATUS_TAG, SERVLET_SUCCESS);
+        request.getSession( ).setAttribute( LOGIN_MSG_TAG, fullName );
+        response.sendRedirect( request.getContextPath() + LOGIN_PAGE );
+    }
+    
+    
+    protected void handleError( String errorReason, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getSession( ).setAttribute( LOGIN_STATUS_TAG, SERVLET_FAILED);
+        request.getSession( ).setAttribute( LOGIN_MSG_TAG, errorReason );
+        request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
+    }
     
 }

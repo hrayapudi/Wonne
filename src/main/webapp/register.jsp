@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
-<%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.register.RegisterValidator" %>
+<%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.util.WonneUtil" %>
+<%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -99,11 +100,11 @@
 	</style>
 	
 	<script>
-		function popupwindow(url, title, w, h) {
+		function popupwindow( url, title, w, h ){
 		  var left = (screen.width/2)-(w/2);
 		  var top = (screen.height/2)-(h/2);
 		  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-		} 
+		}		
 	</script>
 	
 </head>
@@ -142,16 +143,9 @@
                         <li><a href="foundation.html">Wonne Foundation</a></li>
                         <li><a href="markets.html">Wonne Markets</a></li>
                         <li class="dropdown">
-							<a href="services.html">Products</a>
+							<a href="#">Products</a>
 							<ul class="submenu">
-								<li><a href="health-care.html">Primary Halth Care</a></li>
-								<li><a href="heart-treatment.html">Heart Treatment</a></li>
-								<li><a href="neuro.html">Neurology Treatment</a></li>
-								<li><a href="eye.html">Eye Treatment</a></li>
-								<li><a href="kidney.html">Kidney Treatment</a></li>
-								<li><a href="bone.html">Bone Treatment</a></li>
-								<li><a href="dental.html">Dental Treatment</a></li>
-								<li><a href="service-details.html">single tabbed version</a></li>
+								<li><a href="service-details.html">Demo Page</a></li>
 							</ul>
                         </li>
                         <li><a href="blog.html">Blog</a></li>	
@@ -180,16 +174,16 @@
 				
 				<form action="RegisterServlet" method="POST">
 						
-							<input class="registerForm" type="text" 	name="${RegisterItem.FULL_NAME.getIName( )}" 	placeholder="${RegisterItem.FULL_NAME.getHolder()}" minlength="${RegisterItem.FULL_NAME.getMinLength()}" value="${param[RegisterItem.FULL_NAME.getIName( )]}" required >
-							<input class="registerForm" type="email" 	name="${RegisterItem.EMAIL.getIName( )}" 		placeholder="${RegisterItem.EMAIL.getHolder()}" 	minlength="${RegisterItem.EMAIL.getMinLength()}" 	value="${param[RegisterItem.EMAIL.getIName( )]}" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" required>
-							<input class="registerForm" type="password" name="${RegisterItem.PASSWORD.getIName( )}" 	placeholder="${RegisterItem.PASSWORD.getHolder()}" 	minlength="${RegisterItem.PASSWORD.getMinLength()}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be at least 8 characters and must contain at least one number & one uppercase letter" required>
-							<input class="registerForm" type="password" name="${RegisterItem.REPASSWORD.getIName( )}" 	placeholder="${RegisterItem.REPASSWORD.getHolder()}" minlength="${RegisterItem.REPASSWORD.getMinLength()}" required>
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.COMPANY.getIName( )}" 		placeholder="${RegisterItem.COMPANY.getHolder()}" 	minlength="${RegisterItem.COMPANY.getMinLength()}" value="${param[RegisterItem.COMPANY.getIName( )]}" required>
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.PHONE.getIName( )}" 		placeholder="${RegisterItem.PHONE.getHolder()}" 	minlength="${RegisterItem.PHONE.getMinLength()}" value="${param[RegisterItem.PHONE.getIName( )]}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="xxx-xxx-xxxx" required>
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.ADDRESS.getIName( )}" 		placeholder="${RegisterItem.ADDRESS.getHolder()}" 	minlength="${RegisterItem.ADDRESS.getMinLength()}" value="${param[RegisterItem.ADDRESS.getIName( )]}" required>                            
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.CITY.getIName( )}" 		placeholder="${RegisterItem.CITY.getHolder()}" 		minlength="${RegisterItem.CITY.getMinLength()}" value="${param[RegisterItem.CITY.getIName( )]}" required>
+							<input class="registerForm" type="text" 	name="${RegisterItem.FULL_NAME.getIName( )}" 	placeholder="${RegisterItem.FULL_NAME.getHolder()}" minlength="${RegisterItem.FULL_NAME.getMinLength()}" value="${param[RegisterItem.FULL_NAME.getIName( )]}" norequired >
+							<input class="registerForm" type="email" 	name="${RegisterItem.EMAIL.getIName( )}" 		placeholder="${RegisterItem.EMAIL.getHolder()}" 	minlength="${RegisterItem.EMAIL.getMinLength()}" 	value="${param[RegisterItem.EMAIL.getIName( )]}" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" norequired>
+							<input class="registerForm" type="password" name="${RegisterItem.PASSWORD.getIName( )}" 	placeholder="${RegisterItem.PASSWORD.getHolder()}" 	minlength="${RegisterItem.PASSWORD.getMinLength()}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be at least 8 characters and must contain at least one number & one uppercase letter" norequired>
+							<input class="registerForm" type="password" name="${RegisterItem.REPASSWORD.getIName( )}" 	placeholder="${RegisterItem.REPASSWORD.getHolder()}" minlength="${RegisterItem.REPASSWORD.getMinLength()}" norequired>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.COMPANY.getIName( )}" 		placeholder="${RegisterItem.COMPANY.getHolder()}" 	minlength="${RegisterItem.COMPANY.getMinLength()}" value="${param[RegisterItem.COMPANY.getIName( )]}" norequired>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.PHONE.getIName( )}" 		placeholder="${RegisterItem.PHONE.getHolder()}" 	minlength="${RegisterItem.PHONE.getMinLength()}" value="${param[RegisterItem.PHONE.getIName( )]}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="xxx-xxx-xxxx" norequired>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.ADDRESS.getIName( )}" 		placeholder="${RegisterItem.ADDRESS.getHolder()}" 	minlength="${RegisterItem.ADDRESS.getMinLength()}" value="${param[RegisterItem.ADDRESS.getIName( )]}" norequired>                            
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.CITY.getIName( )}" 		placeholder="${RegisterItem.CITY.getHolder()}" 		minlength="${RegisterItem.CITY.getMinLength()}" value="${param[RegisterItem.CITY.getIName( )]}" norequired>
                             
-                            <select class="dropdown-content" name="${RegisterItem.STATE.getIName( )}" required>
+                            <select class="dropdown-content" name="${RegisterItem.STATE.getIName( )}" norequired>
   								<option value="" selected="selected">State</option>
   								<option value="AL" ${param[RegisterItem.STATE.getIName( )] == 'AL' ? 'selected' : ''}>Alabama</option>
   								<option value="AK" ${param[RegisterItem.STATE.getIName( )] == 'AK' ? 'selected' : ''}>Alaska</option>
@@ -245,23 +239,33 @@
 							</select>
 							
 							
-							<input class="registerForm" type="number" name="${RegisterItem.ZIPCODE.getIName( )}" placeholder="${RegisterItem.ZIPCODE.getHolder()}" value="${param[RegisterItem.ZIPCODE.getIName( )]}" minlength="${RegisterItem.ZIPCODE.getMinLength()}" pattern="[0-9]{5}" required>
+							<input class="registerForm" type="number" name="${RegisterItem.ZIPCODE.getIName( )}" placeholder="${RegisterItem.ZIPCODE.getHolder()}" value="${param[RegisterItem.ZIPCODE.getIName( )]}" minlength="${RegisterItem.ZIPCODE.getMinLength()}" pattern="[0-9]{5}" norequired>
 							
-							<select class="dropdown-content" name="${RegisterItem.ORGANIZATION.getIName( )}" required>
+							<select class="dropdown-content" name="${RegisterItem.ORGANIZATION.getIName( )}" norequired>
 								<option value="" selected="selected">Select your organization</option>
                                 <option value="Pharma Supplier"  ${param[RegisterItem.ORGANIZATION.getIName( )] == 'Pharma Supplier' ? 'selected' : ''}>Pharma Supplier</option>
 								<option value="Pharma Client" ${param[RegisterItem.ORGANIZATION.getIName( )] == 'Pharma Client' ? 'selected' : ''}>Pharma Client</option>									
 							</select>
 							
-							<select class="dropdown-content" name="${RegisterItem.ROLE.getIName( )}" required>
+							<select class="dropdown-content" name="${RegisterItem.ROLE.getIName( )}" norequired>
 								<option value="" selected="selected">Select your role</option>
                                 <option value="Patient Services Lead" ${param[RegisterItem.ROLE.getIName( )] == 'Patient Services Lead' ? 'selected' : ''} >Patient Services Lead</option>
 								<option value="Market Access Lead" ${param[RegisterItem.ROLE.getIName( )] == 'Market Access Lead' ? 'selected' : ''} >Market Access Lead</option>									
 							</select>
 							<p></p>
-		
-							<p style="color:red;"><strong>${requestScope.errorMessage}</strong></p>
-						
+							
+												
+							<c:if test="${requestScope[WonneUtil.REGISTER_STATUS_TAG] != null}">
+        						<c:choose>
+									<c:when test="${requestScope[WonneUtil.REGISTER_STATUS_TAG] == WonneUtil.SERVLET_SUCCESS}">
+										<p style="color:green;"><strong>${requestScope[WonneUtil.REGISTER_MSG_TAG]}</strong></p>
+									</c:when>
+									<c:otherwise>
+										<p style="color:red;"><strong>${requestScope[WonneUtil.REGISTER_MSG_TAG]}</strong></p> 
+									</c:otherwise>
+								</c:choose>									
+    						</c:if>
+												
 							
                         <button type="submit" class="registerSignupBtn">Register</button>    
                         <button type="reset"  class="registerCancelBtn">Cancel</button>

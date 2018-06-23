@@ -22,16 +22,15 @@ public class LoginFilter implements Filter {
         HttpServletRequest request      = (HttpServletRequest) req;
         HttpServletResponse response    = (HttpServletResponse) res;
         HttpSession session             = request.getSession( false );
+        boolean userAlreadyLoggedIn     = (session != null && SERVLET_SUCCESS.equals( session.getAttribute(LOGIN_STATUS_TAG) ));
         
-        boolean userAlreadyLoggedIn     = (session != null && session.getAttribute( USER_SESSION_TAG ) != null);
         // User already logged in, so just continue request.
         if( userAlreadyLoggedIn ){
             chain.doFilter(req, res); 
-            return;
+        }else {
+            // User NOT logged in, redirect to login page
+            response.sendRedirect(request.getContextPath() + LOGIN_PAGE);
         }
-        
-        // User NOT logged in, redirect to login page
-        response.sendRedirect(request.getContextPath() + LOGIN_PAGE);
         
     }
 

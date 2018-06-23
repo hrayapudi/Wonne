@@ -15,8 +15,7 @@ import static com.wonne.web.register.RegisterItem.*;
 public class RegisterServlet extends HttpServlet {
     
     private static final long serialVersionUID  = 1L;
-    private static final String FORM_ERR_PAGE   = "/register.jsp";
-    private static final String FORM_VALID_PAGE = "/RegistrationSuccess.html";
+    private static final String REGISTER_PAGE   = "register.jsp";
     private static final String DUP_USER_MSG    = " is already registered! Please login.";
     private final static String NAME            = RegisterServlet.class.getSimpleName( );
     private final static Logger LOGGER          = LoggerFactory.getLogger( NAME );
@@ -34,37 +33,33 @@ public class RegisterServlet extends HttpServlet {
         RegisterBean bean       = parseInput( request );
         ValidationResult result = RegisterValidator.validate( bean );
         if( !result.isValid( ) ){
-            request.setAttribute( ERR_MSG_TAG, result.getReason( ));
-            request.getRequestDispatcher(FORM_ERR_PAGE).forward(request, response);
+            handleError( result.getReason( ), request, response );
             return;
         }
                 
         DBService service       = (DBService) getServletContext( ).getAttribute( DB_SERVICE_TAG );
         if( service == null ){
-            request.setAttribute( ERR_MSG_TAG, DB_SERVICE_ERROR);
-            request.getRequestDispatcher(FORM_ERR_PAGE).forward(request, response);
+            handleError( DB_SERVICE_ERROR, request, response );
             return;
         }
         
         String email            = bean.getEmail( );
         boolean alreadyExists   = service.userExists( email );
         if( alreadyExists ){
-            request.setAttribute( ERR_MSG_TAG, email + DUP_USER_MSG);
-            request.getRequestDispatcher(FORM_ERR_PAGE).forward(request, response);
+            handleError( email + DUP_USER_MSG, request, response );
             return;
         }
         
         boolean isRegistered    = service.register(bean);
         if( !isRegistered ){
-            request.setAttribute( ERR_MSG_TAG, result.getReason( ));
-            request.getRequestDispatcher(FORM_ERR_PAGE).forward(request, response);
+            handleError( DB_STORE_ERROR, request, response );
             return;
         }
         
-        response.sendRedirect( FORM_VALID_PAGE );
-            
+        handleSuccess( email, request, response );
+                            
     }
-        
+
    
     protected final RegisterBean parseInput( HttpServletRequest request ){
         
@@ -95,5 +90,26 @@ public class RegisterServlet extends HttpServlet {
         return bean;
     }
 
+    
+    protected void handleSuccess( String email, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+      
+        StringBuilder message  = new StringBuilder( );
+        message.append( "Registration successful!" );
+        message.append( JSP_NEWLINE );
+        message.append( "Use " + email + " to login from main page." );
+        
+        request.setAttribute( REGISTER_STATUS_TAG, SERVLET_SUCCESS );
+        request.setAttribute( REGISTER_MSG_TAG, message.toString( ));
+        request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
+    }
+    
+    
+    protected void handleError( String reason, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setAttribute( REGISTER_STATUS_TAG, SERVLET_FAILED );
+        request.setAttribute( REGISTER_MSG_TAG, reason );
+        request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
+    }
+        
+    
     
 }
