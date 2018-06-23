@@ -6,8 +6,6 @@ import javax.servlet.http.*;
 
 import com.wonne.web.register.*;
 
-import static com.wonne.web.util.WonneUtil.*;
-
 
 public class RegisterServlet extends HttpServlet {
     
@@ -45,10 +43,8 @@ public class RegisterServlet extends HttpServlet {
     protected final boolean validate( RegisterBean bean, HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         
         ValidationResult result = RegisterValidation.validate( bean );
-        boolean validationPassed= result.isValid( );
-         
-        if( !validationPassed ){
-            request.setAttribute("error", result.getReason( ));
+        if( !result.isValid( ) ){
+            request.setAttribute("errorMessage", result.getReason( ));
             request.getRequestDispatcher("/Register.html").forward(request, response);
             return false;
         }

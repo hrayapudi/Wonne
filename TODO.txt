@@ -22,9 +22,11 @@ How will logout work, should user manually be able to logout?
 
 Admin Page
 ===================================
-If USer is an admin, he can see link to admin page where he can:
+1) Add a Column called IsAdmin in DB, defaults to false.
+2) If User is an admin, he can see link to admin page where he can:
 	a) See all the registered users
-	b)
+	b) Make someone an admin
+	c) Add/Remove users.
 	
 	
 NOTES:
