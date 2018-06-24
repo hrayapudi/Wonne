@@ -128,7 +128,8 @@
 	<section class="forgot-sec-padding">
 		
 		<div class="container">
-				<p><h1 style="color:black;">Reset Password</h1></p>		
+				<p><h2 style="color:black;">Forgot Password</h2></p>		
+				
 				
 				<form action="ForgotServlet" method="POST">
 						

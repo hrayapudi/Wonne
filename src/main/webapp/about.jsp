@@ -87,12 +87,8 @@
 				<div class="col-lg-5 col-md-12">
 					<div class="full-sec-content">
 						<div class="sec-title style-two">
-							<h2>More about us</h2>
-							<span class="decor">
-								<span class="inner"></span>
-							</span>
+							<h2>About Wonne</h2>
 						</div>
-						<h3>We provide professional service</h3>
 						<br>
 						<p>Text 123</p>
 						<br>

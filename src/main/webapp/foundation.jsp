@@ -86,7 +86,10 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-4">
 					<h2>Launched in <b>2018</b> <br>we are bringing together suppliers and customers<br></h2>
-					<a href="register.jsp" class="thm-btn inverse">Join us</a>
+					    <c:if test="${not sessionScope[WonneUtil.LOGIN_BEAN_TAG].isValid()}">
+                        	<a href="register.jsp" class="thm-btn inverse">Join us</a>
+                        </c:if>
+					
 				</div>
 				<div class="col-lg-6 col-md-8">
 					<div class="single-fact">
