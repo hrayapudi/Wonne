@@ -2,11 +2,13 @@ package com.wonne.web.servlet;
 
 import java.io.*;
 import javax.servlet.*;
+import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
 import static com.wonne.web.util.WonneUtil.*;
 
 
+@WebServlet(name = "LogoutServlet", description = "Servlet to handle user logout", urlPatterns = {"/LogoutServlet"})
 public class LogoutServlet extends HttpServlet {
     
     private static final long serialVersionUID  = 1L;

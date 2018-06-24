@@ -15,13 +15,13 @@ public final class RegisterBean {
     private final String address;
     private final String city;
     private final String state;
-    private final String zip;    
+    private final String zipcode;    
     private final String organization;
     private final String role;
     
 
     public RegisterBean(String fullName, String email, String password, String repassword, String companyName, String phone, 
-                        String address, String city, String state, String zip, String organization, String role ) {
+                        String address, String city, String state, String zipcode, String organization, String role ) {
         
         this.fullName   = fullName;
         this.email      = email;
@@ -32,7 +32,7 @@ public final class RegisterBean {
         this.address    = address;
         this.city       = city;
         this.state      = state;
-        this.zip        = zip;
+        this.zipcode    = zipcode;
         this.organization = organization;
         this.role       = role;
                 
@@ -77,8 +77,8 @@ public final class RegisterBean {
     }
     
 
-    public final String getZip() {
-        return zip;
+    public final String getZipcode() {
+        return zipcode;
     }
     
 
@@ -112,8 +112,8 @@ public final class RegisterBean {
         builder.append( city );
         builder.append( ", state=" );
         builder.append( state );
-        builder.append( ", zip=" );
-        builder.append( zip );
+        builder.append( ", zipcode=" );
+        builder.append( zipcode );
         builder.append( ", organization=" );
         builder.append( organization );
         builder.append( ", role=" );

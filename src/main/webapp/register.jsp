@@ -139,17 +139,17 @@
 				<div class="nav-header">
 					<ul>
                     	<li><a href="index.jsp">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>			
-                        <li><a href="foundation.html">Wonne Foundation</a></li>
-                        <li><a href="markets.html">Wonne Markets</a></li>
+                        <li><a href="about.jsp">About Us</a></li>			
+                        <li><a href="foundation.jsp">Wonne Foundation</a></li>
+                        <li><a href="markets.jsp">Wonne Markets</a></li>
                         <li class="dropdown">
 							<a href="#">Products</a>
 							<ul class="submenu">
-								<li><a href="service-details.html">Demo Page</a></li>
+								<li><a href="service-details.jsp">Demo Page</a></li>
 							</ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>	
-                        <li><a href="faq.html">FAQ</a></li>                                                                                                                             
+                        <li><a href="blog.jsp">Blog</a></li>	
+                        <li><a href="faq.jsp">FAQ</a></li>                                                                                                                             
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -174,16 +174,16 @@
 				
 				<form action="RegisterServlet" method="POST">
 						
-							<input class="registerForm" type="text" 	name="${RegisterItem.FULL_NAME.getIName( )}" 	placeholder="${RegisterItem.FULL_NAME.getHolder()}" minlength="${RegisterItem.FULL_NAME.getMinLength()}" value="${param[RegisterItem.FULL_NAME.getIName( )]}" norequired >
-							<input class="registerForm" type="email" 	name="${RegisterItem.EMAIL.getIName( )}" 		placeholder="${RegisterItem.EMAIL.getHolder()}" 	minlength="${RegisterItem.EMAIL.getMinLength()}" 	value="${param[RegisterItem.EMAIL.getIName( )]}" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" norequired>
-							<input class="registerForm" type="password" name="${RegisterItem.PASSWORD.getIName( )}" 	placeholder="${RegisterItem.PASSWORD.getHolder()}" 	minlength="${RegisterItem.PASSWORD.getMinLength()}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be at least 8 characters and must contain at least one number & one uppercase letter" norequired>
-							<input class="registerForm" type="password" name="${RegisterItem.REPASSWORD.getIName( )}" 	placeholder="${RegisterItem.REPASSWORD.getHolder()}" minlength="${RegisterItem.REPASSWORD.getMinLength()}" norequired>
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.COMPANY.getIName( )}" 		placeholder="${RegisterItem.COMPANY.getHolder()}" 	minlength="${RegisterItem.COMPANY.getMinLength()}" value="${param[RegisterItem.COMPANY.getIName( )]}" norequired>
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.PHONE.getIName( )}" 		placeholder="${RegisterItem.PHONE.getHolder()}" 	minlength="${RegisterItem.PHONE.getMinLength()}" value="${param[RegisterItem.PHONE.getIName( )]}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="xxx-xxx-xxxx" norequired>
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.ADDRESS.getIName( )}" 		placeholder="${RegisterItem.ADDRESS.getHolder()}" 	minlength="${RegisterItem.ADDRESS.getMinLength()}" value="${param[RegisterItem.ADDRESS.getIName( )]}" norequired>                            
-                           	<input class="registerForm" type="text" 	name="${RegisterItem.CITY.getIName( )}" 		placeholder="${RegisterItem.CITY.getHolder()}" 		minlength="${RegisterItem.CITY.getMinLength()}" value="${param[RegisterItem.CITY.getIName( )]}" norequired>
+							<input class="registerForm" type="text" 	name="${RegisterItem.FULL_NAME.getIName( )}" 	placeholder="${RegisterItem.FULL_NAME.getHolder()}" minlength="${RegisterItem.FULL_NAME.getMinLength()}" value="${param[RegisterItem.FULL_NAME.getIName( )]}" required >
+							<input class="registerForm" type="email" 	name="${RegisterItem.EMAIL.getIName( )}" 		placeholder="${RegisterItem.EMAIL.getHolder()}" 	minlength="${RegisterItem.EMAIL.getMinLength()}" 	value="${param[RegisterItem.EMAIL.getIName( )]}" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" required>
+							<input class="registerForm" type="password" name="${RegisterItem.PASSWORD.getIName( )}" 	placeholder="${RegisterItem.PASSWORD.getHolder()}" 	minlength="${RegisterItem.PASSWORD.getMinLength()}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must be at least 8 characters and must contain at least one number & one uppercase letter" required>
+							<input class="registerForm" type="password" name="${RegisterItem.REPASSWORD.getIName( )}" 	placeholder="${RegisterItem.REPASSWORD.getHolder()}" minlength="${RegisterItem.REPASSWORD.getMinLength()}" required>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.COMPANY.getIName( )}" 		placeholder="${RegisterItem.COMPANY.getHolder()}" 	minlength="${RegisterItem.COMPANY.getMinLength()}" value="${param[RegisterItem.COMPANY.getIName( )]}" required>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.PHONE.getIName( )}" 		placeholder="${RegisterItem.PHONE.getHolder()}" 	minlength="${RegisterItem.PHONE.getMinLength()}" value="${param[RegisterItem.PHONE.getIName( )]}" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="xxx-xxx-xxxx" required>
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.ADDRESS.getIName( )}" 		placeholder="${RegisterItem.ADDRESS.getHolder()}" 	minlength="${RegisterItem.ADDRESS.getMinLength()}" value="${param[RegisterItem.ADDRESS.getIName( )]}" required>                            
+                           	<input class="registerForm" type="text" 	name="${RegisterItem.CITY.getIName( )}" 		placeholder="${RegisterItem.CITY.getHolder()}" 		minlength="${RegisterItem.CITY.getMinLength()}" value="${param[RegisterItem.CITY.getIName( )]}" required>
                             
-                            <select class="dropdown-content" name="${RegisterItem.STATE.getIName( )}" norequired>
+                            <select class="dropdown-content" name="${RegisterItem.STATE.getIName( )}" required>
   								<option value="" selected="selected">State</option>
   								<option value="AL" ${param[RegisterItem.STATE.getIName( )] == 'AL' ? 'selected' : ''}>Alabama</option>
   								<option value="AK" ${param[RegisterItem.STATE.getIName( )] == 'AK' ? 'selected' : ''}>Alaska</option>
@@ -239,15 +239,15 @@
 							</select>
 							
 							
-							<input class="registerForm" type="number" name="${RegisterItem.ZIPCODE.getIName( )}" placeholder="${RegisterItem.ZIPCODE.getHolder()}" value="${param[RegisterItem.ZIPCODE.getIName( )]}" minlength="${RegisterItem.ZIPCODE.getMinLength()}" pattern="[0-9]{5}" norequired>
+							<input class="registerForm" type="number" name="${RegisterItem.ZIPCODE.getIName( )}" placeholder="${RegisterItem.ZIPCODE.getHolder()}" value="${param[RegisterItem.ZIPCODE.getIName( )]}" minlength="${RegisterItem.ZIPCODE.getMinLength()}" pattern="[0-9]{5}" required>
 							
-							<select class="dropdown-content" name="${RegisterItem.ORGANIZATION.getIName( )}" norequired>
+							<select class="dropdown-content" name="${RegisterItem.ORGANIZATION.getIName( )}" required>
 								<option value="" selected="selected">Select your organization</option>
                                 <option value="Pharma Supplier"  ${param[RegisterItem.ORGANIZATION.getIName( )] == 'Pharma Supplier' ? 'selected' : ''}>Pharma Supplier</option>
 								<option value="Pharma Client" ${param[RegisterItem.ORGANIZATION.getIName( )] == 'Pharma Client' ? 'selected' : ''}>Pharma Client</option>									
 							</select>
 							
-							<select class="dropdown-content" name="${RegisterItem.ROLE.getIName( )}" norequired>
+							<select class="dropdown-content" name="${RegisterItem.ROLE.getIName( )}" required>
 								<option value="" selected="selected">Select your role</option>
                                 <option value="Patient Services Lead" ${param[RegisterItem.ROLE.getIName( )] == 'Patient Services Lead' ? 'selected' : ''} >Patient Services Lead</option>
 								<option value="Market Access Lead" ${param[RegisterItem.ROLE.getIName( )] == 'Market Access Lead' ? 'selected' : ''} >Market Access Lead</option>									
@@ -274,7 +274,7 @@
 					</div>
 					
 					<div class="container">
-						<p style="color:black;">By registering, you are agreeing to our <a href="#" style="color:dodgerblue" onClick="popupwindow('terms.html','Terms & Conditions',600,700)">Terms & Conditions</a></p>
+						<p style="color:black;">By registering, you are agreeing to our <a href="#" style="color:dodgerblue" onClick="popupwindow('terms.jsp','Terms & Conditions',600,700)">Terms & Conditions</a></p>
 					</div>											
 				
 				</div>			
@@ -310,21 +310,21 @@
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>

@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false"%>
+<%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.util.WonneUtil" %>
+<%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,18 +50,20 @@
 			<div class="navigation pull-left">
 				<div class="nav-header">
 					<ul>
-                                            <li><a href="index.jsp">Home</a></li>			
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="markets.html">Wonne Markets</a></li>
-                                            <li class="dropdown">
+                    	<li><a href="index.jsp">Home</a></li>			
+                        <li><a href="about.jsp">About Us</a></li>
+                        <li><a href="markets.jsp">Wonne Markets</a></li>
+                        <li class="dropdown">
 							<a href="#">Products</a>
 							<ul class="submenu">
-								<li><a href="service-details.html">Demo</a></li>								
+								<li><a href="service-details.jsp">Demo</a></li>								
 							</ul>
-                                            </li>
-                                            <li><a href="register.jsp">Register</a></li>	
-                                            <li><a href="blog.html">Blog</a></li>	
-                                            <li><a href="faq.html">FAQ</a></li>                                                                                                               
+                        </li>
+                        <c:if test="${not sessionScope[WonneUtil.LOGIN_BEAN_TAG].isValid()}">
+                        	<li><a href="register.jsp">Register</a></li>
+                        </c:if>
+                        <li><a href="blog.jsp">Blog</a></li>	
+                        <li><a href="faq.jsp">FAQ</a></li>                                                                                                               
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -134,21 +141,21 @@
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>

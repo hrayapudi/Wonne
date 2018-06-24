@@ -3,6 +3,7 @@ package com.wonne.web.servlet;
 import java.io.*;
 import org.slf4j.*;
 import javax.servlet.*;
+import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
 import com.wonne.web.core.*;
@@ -13,6 +14,7 @@ import static com.wonne.web.util.WonneUtil.*;
 import static com.wonne.web.register.RegisterItem.*;
 
 
+@WebServlet(name = "RegisterServlet", description = "Servlet to handle user registration", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
     
     private static final long serialVersionUID  = 1L;
@@ -30,7 +32,12 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        registerUser( request, response );                            
+    }
     
+    
+    protected final void registerUser( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
         RegisterBean bean       = parseInput( request );
         ValidationResult result = RegisterValidator.validate( bean );
         if( !result.isValid( ) ){
@@ -45,8 +52,8 @@ public class RegisterServlet extends HttpServlet {
         }
         
         String email            = bean.getEmail( );
-        boolean alreadyExists   = service.userExists( email );
-        if( alreadyExists ){
+        boolean userExists      = service.userExists( email );
+        if( userExists ){
             handleError( email + DUP_USER_MSG, request, response );
             return;
         }

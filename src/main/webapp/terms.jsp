@@ -11,10 +11,8 @@
 	<link rel="stylesheet" href="css/style.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
-
-
-
 </head>
+
 <body>
     
 	<section class="top-bar">

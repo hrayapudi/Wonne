@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false"%>
+<%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.util.WonneUtil" %>
+<%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,18 +50,20 @@
 			<div class="navigation pull-left">
 				<div class="nav-header">
 					<ul>
-                                            <li><a href="index.jsp">Home</a></li>			
-                                            <li><a href="about.html">About Us</a></li>			
-                                            <li><a href="foundation.html">Wonne Foundation</a></li>
-                                            <li><a href="markets.html">Wonne Markets</a></li>
-                                            <li class="dropdown">
+                    	<li><a href="index.jsp">Home</a></li>			
+                        <li><a href="about.jsp">About Us</a></li>			
+                        <li><a href="foundation.jsp">Wonne Foundation</a></li>
+                        <li><a href="markets.jsp">Wonne Markets</a></li>
+                        <li class="dropdown">
 							<a href="#">Products</a>
 							<ul class="submenu">
-								<li><a href="service-details.html">Demo</a></li>								
+								<li><a href="service-details.jsp">Demo</a></li>								
 							</ul>
-                                            </li>
-                                            <li><a href="register.jsp">Register</a></li>	
-                                            <li><a href="faq.html">FAQ</a></li>                                                                                                                           
+                        </li>
+                        <c:if test="${not sessionScope[WonneUtil.LOGIN_BEAN_TAG].isValid()}">
+                        	<li><a href="register.jsp">Register</a></li>
+                        </c:if>		
+                        <li><a href="faq.jsp">FAQ</a></li>                                                                                                                           
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -84,7 +91,7 @@
 								<div class="box">
 									<div class="content">
 										<ul>
-											<li><a href="blog-details.html"><i class="fa fa-link"></i></a></li>
+											<li><a href="blog-details.jsp"><i class="fa fa-link"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -103,9 +110,9 @@
 								</div>
 							</div>
 							<div class="content">
-								<a href="blog-details.html"><h3>Lates blog post with image</h3></a>
+								<a href="blog-details.jsp"><h3>Lates blog post with image</h3></a>
 								<p>Lorem ipsum dolor sit amet, eum at error nonumy, mel agam dictas praesent no. Id vide ignota it concl udatu rque mea. Veritus fierent ex quo, per cu elit prima. Ius impedit nominati et, suas heu quidam mei ea. Sit erant at populo suavitate an, eu est pericula persecuti, sea... </p>
-								<span>Tag: <a href="blog-details.html">doctor, medicine</a></span>
+								<span>Tag: <a href="blog-details.jsp">doctor, medicine</a></span>
 							</div>
 						</div>
 					</div>
@@ -116,7 +123,7 @@
 								<div class="box">
 									<div class="content">
 										<ul>
-											<li><a href="blog-details.html"><i class="fa fa-link"></i></a></li>
+											<li><a href="blog-details.jsp"><i class="fa fa-link"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -135,9 +142,9 @@
 								</div>
 							</div>
 							<div class="content">
-								<a href="blog-details.html"><h3>Lates blog post with image</h3></a>
+								<a href="blog-details.jsp"><h3>Lates blog post with image</h3></a>
 								<p>Lorem ipsum dolor sit amet, eum at error nonumy, mel agam dictas praesent no. Id vide ignota it concl udatu rque mea. Veritus fierent ex quo, per cu elit prima. Ius impedit nominati et, suas heu quidam mei ea. Sit erant at populo suavitate an, eu est pericula persecuti, sea... </p>
-								<span>Tag: <a href="blog-details.html">doctor, medicine</a></span>
+								<span>Tag: <a href="blog-details.jsp">doctor, medicine</a></span>
 							</div>
 						</div>
 					</div>
@@ -148,7 +155,7 @@
 								<div class="box">
 									<div class="content">
 										<ul>
-											<li><a href="blog-details.html"><i class="fa fa-link"></i></a></li>
+											<li><a href="blog-details.jsp"><i class="fa fa-link"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -167,9 +174,9 @@
 								</div>
 							</div>
 							<div class="content">
-								<a href="blog-details.html"><h3>Lates blog post with image</h3></a>
+								<a href="blog-details.jsp"><h3>Lates blog post with image</h3></a>
 								<p>Lorem ipsum dolor sit amet, eum at error nonumy, mel agam dictas praesent no. Id vide ignota it concl udatu rque mea. Veritus fierent ex quo, per cu elit prima. Ius impedit nominati et, suas heu quidam mei ea. Sit erant at populo suavitate an, eu est pericula persecuti, sea... </p>
-								<span>Tag: <a href="blog-details.html">doctor, medicine</a></span>
+								<span>Tag: <a href="blog-details.jsp">doctor, medicine</a></span>
 							</div>
 						</div>
 					</div>
@@ -180,7 +187,7 @@
 								<div class="box">
 									<div class="content">
 										<ul>
-											<li><a href="blog-details.html"><i class="fa fa-link"></i></a></li>
+											<li><a href="blog-details.jsp"><i class="fa fa-link"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -199,9 +206,9 @@
 								</div>
 							</div>
 							<div class="content">
-								<a href="blog-details.html"><h3>Lates blog post with image</h3></a>
+								<a href="blog-details.jsp"><h3>Lates blog post with image</h3></a>
 								<p>Lorem ipsum dolor sit amet, eum at error nonumy, mel agam dictas praesent no. Id vide ignota it concl udatu rque mea. Veritus fierent ex quo, per cu elit prima. Ius impedit nominati et, suas heu quidam mei ea. Sit erant at populo suavitate an, eu est pericula persecuti, sea... </p>
-								<span>Tag: <a href="blog-details.html">doctor, medicine</a></span>
+								<span>Tag: <a href="blog-details.jsp">doctor, medicine</a></span>
 							</div>
 						</div>
 					</div>
@@ -343,21 +350,21 @@
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>

@@ -2,6 +2,7 @@ package com.wonne.web.servlet;
 
 import java.io.*;
 import javax.servlet.*;
+import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
 import com.wonne.web.database.*;
@@ -9,6 +10,7 @@ import com.wonne.web.database.*;
 import static com.wonne.web.util.WonneUtil.*;
 
 
+@WebServlet(name = "AdminServlet", description = "Servlet to handle admin tasks", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
     
     private static final long serialVersionUID  = 1L;

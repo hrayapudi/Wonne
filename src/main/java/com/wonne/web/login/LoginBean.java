@@ -26,6 +26,10 @@ public final class LoginBean {
         return new LoginBean( true, fullName, email, UserType.fromCode(userTypeId), "" );
     }
     
+    public final static LoginBean createValid( String fullName, String email, UserType userType, String msg ) {
+        return new LoginBean( true, fullName, email, userType, msg );
+    }
+    
     
     public final boolean isValid() {
         return isValid;

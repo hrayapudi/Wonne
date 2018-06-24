@@ -11,57 +11,96 @@ import com.wonne.web.register.*;
 public final class DBService {
 
     private final Connection connection;
-    private final PreparedStatement insertStmt;
-    private final PreparedStatement checkUserStmt;
+    private final PreparedStatement registerUser;
+    private final PreparedStatement lookupUsingEmail;
+    private final PreparedStatement lookupUsingEmailZip;
+    private final PreparedStatement updateUsingEmailZip;
     
     private final static String USER_TABLE      = "User";
     private final static String NAME            = DBService.class.getSimpleName( );
     private final static Logger LOGGER          = LoggerFactory.getLogger( NAME );
     
     public DBService( Connection connection ){
-        this.connection     = connection;
-        this.insertStmt     = createInsertPreparedStatement( connection );
-        this.checkUserStmt  = createCheckUserPreparedStatement( connection );
+        this.connection         = connection;
+        this.registerUser       = createRegisterUserStatement( connection );
+        this.lookupUsingEmail   = createLookupUsingEmailStatement( connection );
+        this.lookupUsingEmailZip= createLookupUsingEmailZipStatement( connection );
+        this.updateUsingEmailZip= createUpdatePassUsingEmailZipStatement( connection );
     }
     
-    
+ 
     public final Connection getConnection( ){
         return connection;
     }
-    
+        
     
     public final boolean userExists( String email ){
+        return (getUserUsingEmail(email) != null);
+    }
+    
+    
+    public final LoginBean getUserUsingEmail( String email ){
         
-        boolean userExists      = false;
-        
-        try {
+        try{
             
-            checkUserStmt.setString( 1, email );
+            lookupUsingEmail.setString( 1, email );
+            ResultSet result        = lookupUsingEmail.executeQuery( );
             
-            ResultSet result    = checkUserStmt.executeQuery( );
-            userExists          = result.next();
+            while( result.next( ) ){
+                String fullName = result.getString( RegisterItem.FULL_NAME.getIName( ) );
+                int userTypeId  = result.getInt( RegisterItem.USER_TYPE_ID.getIName( ) );
+                return LoginBean.createValid( fullName, email, userTypeId );
+            }
             
         }catch( SQLException e ) {
-            LOGGER.warn( "FAILED to check if user exists {}", email, e );   
+            LOGGER.warn( "Exception while getting user from DB for email {}", email, e );   
         }
         
-        return userExists;
+        return null;
+        
+    }
+    
+    public final LoginBean getUserUsingEmailCheckPassword( String email, String password ){
+        
+        try{
+            
+            lookupUsingEmail.setString( 1, email );
+            
+            ResultSet result        = lookupUsingEmail.executeQuery( );
+            
+            while( result.next( ) ){
+                String emailInDB    = result.getString( RegisterItem.EMAIL.getIName( ) );
+                String passwordInDB = result.getString( RegisterItem.PASSWORD.getIName( ) );
+                boolean matchFound  = ( email.equals(emailInDB) && password.equals(passwordInDB) );
+                if( matchFound ){
+                    String fullName = result.getString( RegisterItem.FULL_NAME.getIName( ) );
+                    int userTypeId  = result.getInt( RegisterItem.USER_TYPE_ID.getIName( ) );
+                    return LoginBean.createValid( fullName, email, userTypeId );
+                }
+            }
+            
+        }catch( SQLException e ) {
+            LOGGER.warn( "Exception while getting user from DB for email & password {}", email, e );   
+        }
+        
+        return null;
         
     }
     
     
-    public final LoginBean userLogin( String email, String password ){
+    public final LoginBean getUserUsingEmailZipcode( String email, String zipcode ){
         
         try{
             
-            checkUserStmt.setString( 1, email );
+            lookupUsingEmailZip.setString( 1, email );
+            lookupUsingEmailZip.setString( 2, zipcode );
             
-            ResultSet result        = checkUserStmt.executeQuery( );
+            ResultSet result        = lookupUsingEmailZip.executeQuery( );
+            
             while( result.next( ) ){
-                
                 String emailInDB    = result.getString( RegisterItem.EMAIL.getIName( ) );
-                String passwordInDB = result.getString( RegisterItem.PASSWORD.getIName( ) );
-                boolean matchFound  = ( email.equals(emailInDB) && password.equals(passwordInDB) );
+                String zipcodeInDB  = result.getString( RegisterItem.ZIPCODE.getIName( ) );
+                boolean matchFound  = ( email.equals(emailInDB) && zipcode.equals(zipcodeInDB) );
                 if( matchFound ){
                     String fullName = result.getString( RegisterItem.FULL_NAME.getIName( ) );
                     int userTypeId  = result.getInt( RegisterItem.USER_TYPE_ID.getIName( ) );
@@ -71,7 +110,7 @@ public final class DBService {
             }
             
         }catch( SQLException e ) {
-            LOGGER.warn( "FAILED to check if email and password exists {}", email, e );   
+            LOGGER.warn( "FAILED to check if user with email {} and zipcode exists {}", email, zipcode, e );   
         }
         
         return null;
@@ -79,6 +118,31 @@ public final class DBService {
     }
     
     
+        
+    public final boolean updatePassword( String email, String password, String repassword, String zipcode ){
+
+        int startColumnIndex    = 1;
+        boolean passUpdated     = false;
+        
+        try{ 
+                                   
+            updateUsingEmailZip.setString( startColumnIndex++, password );
+            updateUsingEmailZip.setString( startColumnIndex++, email );
+            updateUsingEmailZip.setString( startColumnIndex++, zipcode );
+                                    
+            int updateResult    = updateUsingEmailZip.executeUpdate( );
+            passUpdated         = ( updateResult > -1 );
+                                       
+        }catch( SQLException e ){
+            LOGGER.warn( "FAILED to update password for user {} {}", email, zipcode, e );        
+        }
+            
+        return passUpdated;
+        
+    }
+    
+    
+    //All users are created as VIEW users
     public final boolean register( RegisterBean bean ){    
                 
         int startColumnIndex    = 1;
@@ -86,21 +150,21 @@ public final class DBService {
                 
         try{ 
                                    
-            insertStmt.setString( startColumnIndex++, bean.getFullName( ) );
-            insertStmt.setString( startColumnIndex++, bean.getEmail( ) );
-            insertStmt.setString( startColumnIndex++, bean.getPassword( ) );
-            insertStmt.setString( startColumnIndex++, bean.getCompanyName( ) );
-            insertStmt.setString( startColumnIndex++, bean.getPhone( ) );
+            registerUser.setString( startColumnIndex++, bean.getFullName( ) );
+            registerUser.setString( startColumnIndex++, bean.getEmail( ) );
+            registerUser.setString( startColumnIndex++, bean.getPassword( ) );
+            registerUser.setString( startColumnIndex++, bean.getCompanyName( ) );
+            registerUser.setString( startColumnIndex++, bean.getPhone( ) );
             
-            insertStmt.setString( startColumnIndex++, bean.getAddress( ) );
-            insertStmt.setString( startColumnIndex++, bean.getCity( ) );
-            insertStmt.setString( startColumnIndex++, bean.getState( ) );
-            insertStmt.setString( startColumnIndex++, bean.getZip( ) );
-            insertStmt.setString( startColumnIndex++, bean.getOrganization( ) );
-            insertStmt.setString( startColumnIndex++, bean.getRole( ) );
-            insertStmt.setInt( startColumnIndex,   UserType.VIEW.getCode( ) );
+            registerUser.setString( startColumnIndex++, bean.getAddress( ) );
+            registerUser.setString( startColumnIndex++, bean.getCity( ) );
+            registerUser.setString( startColumnIndex++, bean.getState( ) );
+            registerUser.setString( startColumnIndex++, bean.getZipcode( ) );
+            registerUser.setString( startColumnIndex++, bean.getOrganization( ) );
+            registerUser.setString( startColumnIndex++, bean.getRole( ) );
+            registerUser.setInt   ( startColumnIndex,   UserType.VIEW.getCode( ) );
                                     
-            int updateResult    = insertStmt.executeUpdate( );
+            int updateResult    = registerUser.executeUpdate( );
             registered          = ( updateResult > -1 );
             LOGGER.info( "Successfully registered user {}", bean );
                            
@@ -111,13 +175,21 @@ public final class DBService {
         return registered;
     
     }
+        
     
-    
-    protected final PreparedStatement createCheckUserPreparedStatement( Connection connection ){
+    protected final PreparedStatement createLookupUsingEmailStatement( Connection connection ){
         PreparedStatement pStatement = null;
     
         try {
-            pStatement  = connection.prepareStatement("SELECT * FROM " + USER_TABLE + " WHERE Email = ?");
+            
+            StringBuilder builder   = new StringBuilder( 32 );
+            
+            builder.append( "SELECT * FROM " ).append( USER_TABLE );
+            builder.append( " WHERE " );
+            builder.append( RegisterItem.EMAIL.getIName( ) ).append( " = ?" );
+                        
+            String query            = builder.toString( );
+            pStatement              = connection.prepareStatement( query );
             
         }catch( Exception e ) {
             LOGGER.warn( "FAILED to created prepared statement.", e );
@@ -128,7 +200,32 @@ public final class DBService {
     }
     
     
-    protected final PreparedStatement createInsertPreparedStatement( Connection connection ){
+    protected final PreparedStatement createLookupUsingEmailZipStatement( Connection connection ){
+        PreparedStatement pStatement = null;
+    
+        try {
+            
+            StringBuilder builder   = new StringBuilder( 32 );
+            
+            builder.append( "SELECT * FROM " ).append( USER_TABLE );
+            builder.append( " WHERE " );
+            builder.append( RegisterItem.EMAIL.getIName( ) ).append( " = ? AND " );
+            builder.append( RegisterItem.ZIPCODE.getIName( ) ).append( " = ?" );
+            
+            String query            = builder.toString( );
+            pStatement              = connection.prepareStatement( query );
+            
+        }catch( Exception e ) {
+            LOGGER.warn( "FAILED to created prepared statement.", e );
+        }
+    
+        return pStatement;
+    
+    }
+    
+    
+    
+    protected final PreparedStatement createRegisterUserStatement( Connection connection ){
         PreparedStatement pStatement = null;
     
         try {
@@ -163,15 +260,45 @@ public final class DBService {
     
     }
 
+    
+    
+    protected final PreparedStatement createUpdatePassUsingEmailZipStatement( Connection connection ){
+        
+        PreparedStatement pStatement = null;
+        
+        try {
+            
+            StringBuilder builder = new StringBuilder( 64 );
+            
+            builder.append( "UPDATE " ).append( USER_TABLE ).append( " SET " );
+            builder.append( RegisterItem.PASSWORD.getIName( ) ).append( "=? " );
+            builder.append( " WHERE " );
+            builder.append( RegisterItem.EMAIL.getIName( ) ).append( "=?" ).append( " AND " );
+            builder.append( RegisterItem.ZIPCODE.getIName( ) ).append( "=?" );
+            
+            String query    = builder.toString( );
+            pStatement      = connection.prepareStatement(query);
+            
+        }catch( Exception e ) {
+            LOGGER.warn( "FAILED to created prepared statement.", e );
+        }
+    
+        return pStatement;
+        
+    }
+    
 
     public final void close( ) throws SQLException {
+        
         if( connection != null ) {
             connection.close();
         }
+        
         AbandonedConnectionCleanupThread.checkedShutdown( );
         LOGGER.info("Successfully closed connection to DB.");
         
     }
+
     
     
 }

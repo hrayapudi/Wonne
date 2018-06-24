@@ -73,7 +73,7 @@ public final class RegisterValidator{
         }
         
         
-        if( !isValidZip(bean.getZip()) ){
+        if( !isValidZip(bean.getZipcode()) ){
             error.append( "Zipcode is invalid!").append( JSP_NEWLINE );            
         }
                 
@@ -96,8 +96,8 @@ public final class RegisterValidator{
     }
 
 
-    protected final static boolean isValidZip( String zip ) {
-        return ( isValid(zip) && zip.matches(ZIP_REGEX) && zip.length() == ZIPCODE.getMinLength( ) );        
+    protected final static boolean isValidZip( String zipcode ) {
+        return ( isValid(zipcode) && zipcode.matches(ZIP_REGEX) && zipcode.length() == ZIPCODE.getMinLength( ) );        
     }
 
     

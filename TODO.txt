@@ -4,48 +4,34 @@ DONE
 2. When performing server-side validation, how do we show errors?
 3. When performing server-side validation, populate the fields that passed validation (don't force the user to fill them again)
 4. Do we create 1 connection to DB or connection every time a Register/Login is called?
+5. Work on forgot password page
+6. Keep a copy of Table Schemas
+7. Use annotations instead of servlet mappings in Web.xml
+8. Add a Column called IsAdmin in DB, defaults to false.
+9. Hide register link when user is logged in.
 
 
-Registration
-===================================
-4. Once registration is successful, forward to the login page and show the email as loginId and password.
-3. Password is stored as text
-5. Do we need to email user with login and password?
-6. Make sure we can see logs
-
-Login
-===================================
-0. What is a filter servlet and how is it used for Auth?
-1. Work on Login Page
-2. How will we remember that user is logged in, session tracking
+TODO:
+==================================
+1. What does the search button do on the main page?
+2. What is a filter servlet and how is it used for Auth?
 3. How will be show that user is logged in
 4. Create a table to track login activity (Last logged in, times logged in etc)
-
-Logout
-===================================
-1. How will logout work, should user manually be able to logout?
-2. Work on forgot password page
-
-Cancel
-===================================
-1. Cancel button doesn't reset fields (after we have submitted the form)
-
-
-Admin Page
-===================================
-1) Add a Column called IsAdmin in DB, defaults to false.
-2) If User is an admin, he can see link to admin page where he can:
+5. Cancel button doesn't reset fields (after we have submitted the form)
+6. If User is an admin, he can see link to admin page where he can:
 	a) See all the registered users
 	b) Make someone an admin
 	c) Add/Remove users.
 	
 	
-NOTES:
 
-Search
+Should Do
 ===================================
-What does the search button do on the main page?
+1. Once registration is successful, forward to the login page and show the email as loginId and password.
+2. Password is stored as text
+3. Make sure we can see logs
 
+	
 
 
 Set-up
@@ -64,4 +50,4 @@ Connecting to AWS from Windows
 1. Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-msi-on-windows
 2. Log on to EC2 console, from left side, click on "Key Pairs", generate a new key Pair and download it.
 3. Follow the instructions here to open port 22: https://aws.amazon.com/premiumsupport/knowledge-center/ec2-linux-ssh-troubleshooting/
-4. 
+4. Setting Security group for App to access RDS: https://stackoverflow.com/questions/46311096/unable-to-establish-connection-to-jdbcmysql-communication-link-failure

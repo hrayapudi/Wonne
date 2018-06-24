@@ -47,18 +47,20 @@
 			<div class="navigation pull-left">
 				<div class="nav-header">
 					<ul>
-                    	<li><a href="about.html">About Us</a></li>			
-                        <li><a href="foundation.html">Wonne Foundation</a></li>
-                        <li><a href="markets.html">Wonne Markets</a></li>
+                    	<li><a href="about.jsp">About Us</a></li>			
+                        <li><a href="foundation.jsp">Wonne Foundation</a></li>
+                        <li><a href="markets.jsp">Wonne Markets</a></li>
                         <li class="dropdown">
 							<a href="#">Products</a>
 							<ul class="submenu">
-								<li><a href="service-details.html">Demo</a></li>
+								<li><a href="service-details.jsp">Demo</a></li>
 							</ul>
                        	</li>
-                        <li><a href="register.jsp">Register</a></li>	
-                        <li><a href="blog.html">Blog</a></li>	
-                        <li><a href="faq.html">FAQ</a></li>                                                                                                                    
+                       	<c:if test="${not sessionScope[WonneUtil.LOGIN_BEAN_TAG].isValid()}">
+                        	<li><a href="register.jsp">Register</a></li>
+                        </c:if>	
+                        <li><a href="blog.jsp">Blog</a></li>	
+                        <li><a href="faq.jsp">FAQ</a></li>                                                                                                                    
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -153,7 +155,7 @@
 				</li>			
 				
 				<li data-transition="parallaxvertical">
-					<img src="img/slides/yoga3.png"  alt="" width="1920" height="705" data-bgposition="top center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="2" >
+					<img src="img/slides/yoga3.png"  alt="" width="1920" height="705" data-bgposition="top center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="3" >
 					<div class="tp-caption sfr tp-resizeme thm-banner-h1 heavy" 
 				        data-x="left" data-hoffset="0" 
 				        data-y="top" data-voffset="75" 
@@ -227,14 +229,14 @@
 								<input type="password" name="${RegisterItem.PASSWORD.getIName( )}" 	placeholder="${RegisterItem.PASSWORD.getHolder()}" required>
 							</div>
 							<div class="single-form">
-								<button name="login" type="submit">Login</button>
+								<button name="login" value="login" type="submit">Login</button>
 							</div>
                     		<div class="single-form">
-								<button name="forgot" type="submit">Forgot Password?</button>
+								<button name="forgot" onclick="location.href='forgot.jsp';">Forgot Password?</button>
 							</div>
 						</form>
 						<p></p>	
-						<p style="color:red;"><strong>${sessionScope[WonneUtil.LOGIN_BEAN_TAG].getMessage()}</strong></p>	
+						<p style="color:red;"><strong>${requestScope[WonneUtil.LOGIN_BEAN_TAG].getMessage()}</strong></p>	
 					</div>
 				</c:otherwise>
 			</c:choose>
@@ -500,21 +502,21 @@
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>

@@ -1,8 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false"%>
+<%@ page import="com.wonne.web.register.RegisterItem, com.wonne.web.util.WonneUtil" %>
+<%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Appointment || Wonne Web</title>
+	<title>About || Wonne Web</title>
 
 	<!-- responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +21,7 @@
 
 </head>
 <body>
-
-	
+    
 	<section class="top-bar">
 
             <div class="container">
@@ -40,23 +44,26 @@
 	</section> <!-- /.top-bar -->
 
 
+
 	<nav class="mainmenu-area stricky">
 		<div class="container">
 			<div class="navigation pull-left">
 				<div class="nav-header">
 					<ul>
-                                            <li><a href="index.jsp">Home</a></li>
-                                            <li><a href="about.html">About Us</a></li>			
-                                            <li><a href="foundation.html">Wonne Foundation</a></li>
-                                            <li class="dropdown">
+                    	<li><a href="index.jsp">Home</a></li>			
+                        <li><a href="foundation.jsp">Wonne Foundation</a></li>
+                        <li><a href="markets.jsp">Wonne Markets</a></li>
+                        <li class="dropdown">
 							<a href="#">Products</a>
 							<ul class="submenu">
-								<li><a href="service-details.html">Demo</a></li>								
+								<li><a href="service-details.jsp">Demo</a></li>
 							</ul>
-                                            </li>
-                                            <li><a href="register.jsp">Register</a></li>	
-                                            <li><a href="blog.html">Blog</a></li>	
-                                            <li><a href="faq.html">FAQ</a></li>         
+                        </li>
+                        <c:if test="${not sessionScope[WonneUtil.LOGIN_BEAN_TAG].isValid()}">
+                        	<li><a href="register.jsp">Register</a></li>
+                        </c:if>	
+                        <li><a href="blog.jsp">Blog</a></li>	
+                        <li><a href="faq.jsp">FAQ</a></li>                                                                                                                   
 					</ul>
 				</div>
 				<div class="nav-footer">
@@ -72,35 +79,101 @@
 		</div>
 	</nav> <!-- /.mainmenu-area -->
 
+	
+	<section class="sec-padding about-content full-sec">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-lg-5 col-md-12">
+					<div class="full-sec-content">
+						<div class="sec-title style-two">
+							<h2>More about us</h2>
+							<span class="decor">
+								<span class="inner"></span>
+							</span>
+						</div>
+						<h3>We provide professional service</h3>
+						<br>
+						<p>Text 123</p>
+						<br>
+						<p>Text 345</p>
+						<br>						
+					</div>
+				</div>
+				<div class="col-md-7 hidden-md text-right">
+					<img src="img/resources/about-1.jpg" alt="Awesome Image"/>
+				</div>
+			</div>
+		</div>
+	</section>
 
-        	<section class="sec-padding faq-home">
+	
+	<section class="sec-padding col-4">
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-md-3">
+					<div class="single-specialize">
+						<div class="icon-box">
+							<i class="flaticon-medical-1"></i>
+						</div>
+						<a href="#"><h3>Primary Health Care</h3></a>
+						<p>There are many variations of lorem <br>passagei of Lorem Ipsum available but the majority have </p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="single-specialize">
+						<div class="icon-box">
+							<i class="flaticon-medical-3"></i>
+						</div>
+						<a href="#"><h3>Dental Treatment</h3></a>
+						<p>There are many variations of lorem <br>passagei of Lorem Ipsum available but the majority have </p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="single-specialize">
+						<div class="icon-box">
+							<i class="flaticon-medical-2"></i>
+						</div>
+						<a href="#"><h3>Heart Treatment</h3></a>
+						<p>There are many variations of lorem <br>passagei of Lorem Ipsum available but the majority have </p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="single-specialize">
+						<div class="icon-box">
+							<i class="flaticon-medical-5"></i>
+						</div>
+						<a href="#"><h3>Neurology Treatment</h3></a>
+						<p>There are many variations of lorem <br>passagei of Lorem Ipsum available but the majority have </p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+
+
+	<section class="sec-padding faq-home">
 		<div class="container">
 			<hr>
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
-					
+					<div class="sec-title style-two">
+						<h2>Why Choose us?</h2>
+						<span class="decor">
+							<span class="inner"></span>
+						</span>
+					</div>
 					<div class="accrodion-grp" data-grp-name="faq-accrodion">
 						<div class="accrodion active">
 							<div class="accrodion-title">
-								<h2>
-									<span class="decor">
-										<span class="inner"></span>
-									</span>
-									<span class="text">Wonne Markets</span>
-								</h2>
-							</div>
-							<div class="accrodion-content">
-								<p>Lorem Ipsum is simply du my text of the pritin industry. Lorm Ipsum hasbeen the industry's standardsdummy text eversince the 1500s,  when an unknown printer</p>
-								<p>took a galley of type and scramble it to make type specimen book. It has survived not only five centurie, but also the leap into</p>
-							</div>
-						</div>
-						<div class="accrodion ">
-							<div class="accrodion-title">
 								<h4>
 									<span class="decor">
 										<span class="inner"></span>
 									</span>
-									<span class="text">Text 1</span>
+									<span class="text">We are always carefull to our patient and service </span>
 								</h4>
 							</div>
 							<div class="accrodion-content">
@@ -114,7 +187,7 @@
 									<span class="decor">
 										<span class="inner"></span>
 									</span>
-									<span class="text">Text 2</span>
+									<span class="text">Book and appoinment with any specialist anytime</span>
 								</h4>
 							</div>
 							<div class="accrodion-content">
@@ -128,7 +201,21 @@
 									<span class="decor">
 										<span class="inner"></span>
 									</span>
-									<span class="text">Text 3</span>
+									<span class="text">We offer lot of service in a best price</span>
+								</h4>
+							</div>
+							<div class="accrodion-content">
+								<p>Lorem Ipsum is simply du my text of the pritin industry. Lorm Ipsum hasbeen the industry's standardsdummy text eversince the 1500s,  when an unknown printer</p>
+								<p>took a galley of type and scramble it to make type specimen book. It has survived not only five centurie, but also the leap into</p>
+							</div>
+						</div>
+						<div class="accrodion ">
+							<div class="accrodion-title">
+								<h4>
+									<span class="decor">
+										<span class="inner"></span>
+									</span>
+									<span class="text">Online payment seystem with different method</span>
 								</h4>
 							</div>
 							<div class="accrodion-content">
@@ -154,18 +241,13 @@
 			</div>
 		</div>
 	</section>
+
+
 	<section class="footer-call-to-action">		
 	</section>
-
-       	<section class="contact-content sec-padding">
-            <div class="container">
-                <div class="google-map" id="contact-page-google-map" data-icon-path="img/resources/map-marker.png" data-map-lat="-37.812802" data-map-lng="144.956981" data-map-zoom="10" data-map-title="Wonne HQ"></div>
-            </div>
-        </section>
-
-
 	
-        <footer class="footer sec-padding">
+	
+	<footer class="footer sec-padding">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
@@ -192,21 +274,21 @@
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
 							<li>
 								<span class="border"></span>
 								<div class="content">
-									<a href="blog-details.html">If you need a crown or lorem an implant you will pay it </a>
+									<a href="blog-details.jsp">If you need a crown or lorem an implant you will pay it </a>
 									<span>July 2, 2014</span>
 								</div>
 							</li>
@@ -216,9 +298,6 @@
 			</div>
 		</div>
 	</footer>
-        
-        
-
 
 	<!-- main jQuery -->
 	<script src="js/jquery-1.11.1.min.js"></script>
