@@ -18,7 +18,7 @@ public final class DBConnection {
         return service;
     }
     
-    
+       
     protected final Connection getAWSDBConnection( ){
         
         String hostname     = System.getProperty("RDS_HOSTNAME");

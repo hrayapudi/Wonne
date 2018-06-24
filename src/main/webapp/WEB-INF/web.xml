@@ -9,6 +9,11 @@
   		<welcome-file>index.jsp</welcome-file>  	
   	</welcome-file-list>
   
+  	<context-param>
+        <param-name>logger-config-location</param-name>
+        <param-value>WEB-INF/logback.xml</param-value>
+    </context-param>
+    
     <servlet>
     	<servlet-name>RegisterServlet</servlet-name>
     	<servlet-class>com.wonne.web.servlet.RegisterServlet</servlet-class>

@@ -1,5 +1,6 @@
 package com.wonne.web.servlet;
 
+import java.io.*;
 import java.sql.*;
 import org.slf4j.*;
 import javax.servlet.*;
@@ -12,42 +13,48 @@ import static com.wonne.web.util.WonneUtil.*;
 @WebListener
 public class WonneContextListener implements ServletContextListener{
 
-    private final static Logger LOGGER          = LoggerFactory.getLogger( "WonneContextListener" );
+    private final static String LOG_LOC = "logger-config-location";
+    private final static Logger LOGGER  = LoggerFactory.getLogger( "WonneContextListener" );
   
     
     @Override
     public void contextInitialized( ServletContextEvent event ){
         
         ServletContext ctx  = event.getServletContext();
+        loadLogger( ctx );
+        
         DBService service   = new DBConnection( ).getDBService( );
         if( service != null ) {
             ctx.setAttribute( DB_SERVICE_TAG, service );
             LOGGER.info("Successfully stored RegisterService in ServletContext with tag: {}", DB_SERVICE_TAG);
         }
         
-        /*
-        //initialize log4j
-        String log4jConfig = ctx.getInitParameter("log4j-config");
-        if(log4jConfig == null){
-            System.err.println("No log4j-config init param, initializing log4j with BasicConfigurator");
-            BasicConfigurator.configure();
-        }else {
-            String webAppPath = ctx.getRealPath("/");
-            String log4jProp = webAppPath + log4jConfig;
-            File log4jConfigFile = new File(log4jProp);
-            if (log4jConfigFile.exists()) {
-                System.out.println("Initializing log4j with: " + log4jProp);
-                DOMConfigurator.configure(log4jProp);
-            } else {
-                System.err.println(log4jProp + " file not found, initializing log4j with BasicConfigurator");
-                BasicConfigurator.configure();
-            }
-        }
-        */
-        
+       
     }
 
-     
+    
+    protected final void loadLogger( ServletContext context ){
+        
+        String loggerCfgFile    = context.getInitParameter(LOG_LOC);
+        
+        try {
+            
+            if( !isValid(loggerCfgFile) ){
+                System.err.println("FAILED to load logger config file as it in not specified in web.xml!");
+                return;
+            }
+            
+            String fullPath     = context.getRealPath("") + File.separator + loggerCfgFile;
+            System.setProperty( "logback.configurationFile", fullPath );
+            LOGGER.info( "Successfully load log config from [{}]", loggerCfgFile );
+        
+        }catch( Exception e ) {
+            System.err.println("FAILED to load logger config from " + loggerCfgFile);
+            e.printStackTrace( );
+        }
+        
+         
+    }
            
     @Override
     public void contextDestroyed( ServletContextEvent event ){
