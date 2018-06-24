@@ -165,7 +165,9 @@ public final class DBService {
 
 
     public final void close( ) throws SQLException {
-        connection.close();
+        if( connection != null ) {
+            connection.close();
+        }
         AbandonedConnectionCleanupThread.checkedShutdown( );
         LOGGER.info("Successfully closed connection to DB.");
         

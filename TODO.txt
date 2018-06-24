@@ -54,4 +54,14 @@ Set-up
 2. Download and install Eclipse EE & then install AWS plugin
 3. Download and install Maven
 4. Download and install tomcat
+5. Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-msi-on-windows
+
  
+ 
+ 
+Connecting to AWS from Windows
+==================================== 
+1. Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-msi-on-windows
+2. Log on to EC2 console, from left side, click on "Key Pairs", generate a new key Pair and download it.
+3. Follow the instructions here to open port 22: https://aws.amazon.com/premiumsupport/knowledge-center/ec2-linux-ssh-troubleshooting/
+4. 

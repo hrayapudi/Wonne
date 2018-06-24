@@ -6,48 +6,38 @@ import org.slf4j.*;
 
 public final class DBConnection {
 
-    private final static String MYSQL_DRIVER    = "com.mysql.jdbc.Driver";
-    private final static Logger LOGGER          = LoggerFactory.getLogger( "DBConnection" );
+    private final static Logger LOGGER  = LoggerFactory.getLogger( "DBConnection" );
     
  
-    public final DBService getDBService( ){
+    public final DBService getDBService( String driverName, String dbHost, String dbPort, String dbName ){
+        LOGGER.info( "Attempting to create DB connection.");
         
-        Connection dbConn   = getAWSDBConnection( );
-        DBService service   = new DBService( dbConn );
+        String userName     = System.getProperty("RDS_USERNAME");
+        String password     = System.getProperty("RDS_PASSWORD");
+        Connection conn     = connect( driverName, dbHost, dbPort, dbName, userName, password );
+        DBService service   = new DBService( conn );
         
         return service;
     }
     
-       
-    protected final Connection getAWSDBConnection( ){
-        
-        String hostname     = System.getProperty("RDS_HOSTNAME");
-        String port         = System.getProperty("RDS_PORT");
-        String dbName       = System.getProperty("RDS_DB_NAME");
-        String userName     = System.getProperty("RDS_USERNAME");
-        String password     = System.getProperty("RDS_PASSWORD");
-        Connection conn     = connect( hostname, port, dbName, userName, password );
-        
-        return conn;
-    }
+              
     
-        
-    
-    protected final Connection connect( String hostname, String port, String dbName, String userName, String password ){
+    protected final Connection connect( String driverName, String hostname, String port, String dbName, String userName, String password ){
         
         Connection connection   = null;
         
         try {
-            Class.forName( MYSQL_DRIVER );
+            Class.forName( driverName );
+            LOGGER.info("Loaded driver [{}] ", driverName );
             
             String jdbcUrl      = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName;
-            LOGGER.info("Attempting to connect to DB with url {}", jdbcUrl);
+            LOGGER.info("Connecting to DB at [{}], User: [{}] ", jdbcUrl, userName );
 
             connection          = DriverManager.getConnection(jdbcUrl, userName, password);
-            LOGGER.info("Successfully connected to {}", jdbcUrl);
+            LOGGER.info("Successfully connected to database: [{}]", dbName);
             
         }catch( Exception e) { 
-            LOGGER.error("FAILED to create DB connection", e );
+            LOGGER.error("FAILED to connect to DB [{}:{}] [{}] [{}]", hostname, port, dbName, userName, e );
         }
         
         return connection;
