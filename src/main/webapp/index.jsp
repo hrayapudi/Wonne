@@ -76,7 +76,8 @@
 
 
 	<section class="rev_slider_wrapper">
-		<div id="slider1" class="rev_slider"  data-version="5.0">
+		
+		<div id="slider1" class="rev_slider" data-version="5.0">
 			
 			<ul>
             	<li data-transition="parallaxvertical">
@@ -90,9 +91,9 @@
 				        data-transform_out="o:0" 
 				        data-start="500">
 						Wonne Markets
-				    </div>
+				 </div>
                                     
-                                    <div class="tp-caption sfl tp-resizeme thm-banner-h1" 
+                 <div class="tp-caption sfl tp-resizeme thm-banner-h1" 
 				        data-x="left" data-hoffset="0" 
 				        data-y="top" data-voffset="130" 
 				        data-whitespace="nowrap"
@@ -100,10 +101,10 @@
 				        data-transform_in="o:0" 
 				        data-transform_out="o:0" 
 				        data-start="1000">
-                                                Making Medicines accessible to everyone
-				    </div>
+                        Making Medicines accessible to everyone
+				 </div>
 				
-                                    <div class="tp-caption sfb tp-resizeme thm-banner-h3" 
+                 <div class="tp-caption sfb tp-resizeme thm-banner-h3" 
 				        data-x="left" data-hoffset="0" 
 				        data-y="top" data-voffset="203" 
 				        data-whitespace="nowrap"
@@ -149,7 +150,41 @@
 						An Insightful Marketplace bringing together Pharma Buyers and Leading Suppliers
 				    </div>					
                                                                   
-				</li>				
+				</li>			
+				
+				<li data-transition="parallaxvertical">
+					<img src="img/slides/yoga3.png"  alt="" width="1920" height="705" data-bgposition="top center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="2" >
+					<div class="tp-caption sfr tp-resizeme thm-banner-h1 heavy" 
+				        data-x="left" data-hoffset="0" 
+				        data-y="top" data-voffset="75" 
+				        data-whitespace="nowrap"
+				        data-transform_idle="o:1;" 
+				        data-transform_in="o:0" 
+				        data-transform_out="o:0" 
+				        data-start="500">
+						Wonne Markets
+				    </div>
+					<div class="tp-caption sfl tp-resizeme thm-banner-h1" 
+				        data-x="left" data-hoffset="0" 
+				        data-y="top" data-voffset="130" 
+				        data-whitespace="nowrap"
+				        data-transform_idle="o:1;" 
+				        data-transform_in="o:0" 
+				        data-transform_out="o:0" 
+				        data-start="1000">
+                                                Making Medicines accessible to everyone
+				    </div>
+					<div class="tp-caption sfb tp-resizeme thm-banner-h3" 
+				        data-x="left" data-hoffset="0" 
+				        data-y="top" data-voffset="203" 
+				        data-whitespace="nowrap"
+				        data-transform_idle="o:1;" 
+				        data-transform_in="o:0" 
+				        data-transform_out="o:0" 
+				        data-start="1500">
+						An Insightful Marketplace bringing together Pharma Buyers and Leading Suppliers
+				    </div>	                                                                
+				</li>					
 			</ul>
 		</div>
 	</section>
@@ -159,9 +194,9 @@
 		<div class="container">
                       
             <c:choose>
-    			<c:when test="${sessionScope[WonneUtil.LOGIN_STATUS_TAG] == WonneUtil.SERVLET_SUCCESS}">
+            	<c:when test="${sessionScope[WonneUtil.LOGIN_BEAN_TAG].isValid()}">
     				<div class="heading">
-						<h3>${sessionScope[WonneUtil.LOGIN_MSG_TAG]}<h3>		
+						<h3>${sessionScope[WonneUtil.LOGIN_BEAN_TAG].getFullName()}<h3>		
             		</div>
             	
 					<div class="form-grp clearfix">            
@@ -189,7 +224,7 @@
 								<input type="email" name="${RegisterItem.EMAIL.getIName( )}" 		placeholder="${RegisterItem.EMAIL.getHolder()}" required>
 							</div>
                     		<div class="single-form">
-								<input type="password" name="${RegisterItem.PASSWORD.getIName( )}" 		placeholder="${RegisterItem.PASSWORD.getHolder()}" required>
+								<input type="password" name="${RegisterItem.PASSWORD.getIName( )}" 	placeholder="${RegisterItem.PASSWORD.getHolder()}" required>
 							</div>
 							<div class="single-form">
 								<button name="login" type="submit">Login</button>
@@ -199,7 +234,7 @@
 							</div>
 						</form>
 						<p></p>	
-						<p style="color:red;"><strong>${sessionScope[WonneUtil.LOGIN_MSG_TAG]}</strong></p>	
+						<p style="color:red;"><strong>${sessionScope[WonneUtil.LOGIN_BEAN_TAG].getMessage()}</strong></p>	
 					</div>
 				</c:otherwise>
 			</c:choose>

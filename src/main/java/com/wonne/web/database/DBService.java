@@ -2,6 +2,9 @@ package com.wonne.web.database;
 
 import java.sql.*;
 import org.slf4j.*;
+
+import com.wonne.web.core.*;
+import com.wonne.web.login.*;
 import com.wonne.web.register.*;
 
 public final class DBService {
@@ -46,49 +49,55 @@ public final class DBService {
     }
     
     
-    public final String userPasswordMatch( String email, String password ){
+    public final LoginBean userLogin( String email, String password ){
         
         try{
             
             checkUserStmt.setString( 1, email );
             
             ResultSet result        = checkUserStmt.executeQuery( );
-            while( result.next( ) ) {
+            while( result.next( ) ){
+                
                 String emailInDB    = result.getString( RegisterItem.EMAIL.getIName( ) );
                 String passwordInDB = result.getString( RegisterItem.PASSWORD.getIName( ) );
                 boolean matchFound  = ( email.equals(emailInDB) && password.equals(passwordInDB) );
-                if( matchFound ) {
-                    return result.getString( RegisterItem.FULL_NAME.getIName( ) );                    
+                if( matchFound ){
+                    String fullName = result.getString( RegisterItem.FULL_NAME.getIName( ) );
+                    int userTypeId  = result.getInt( RegisterItem.USER_TYPE_ID.getIName( ) );
+                    return LoginBean.createValid( fullName, email, userTypeId );
                 }
+                
             }
             
         }catch( SQLException e ) {
             LOGGER.warn( "FAILED to check if email and password exists {}", email, e );   
         }
         
-        return "";
+        return null;
         
     }
     
     
     public final boolean register( RegisterBean bean ){    
                 
+        int startColumnIndex    = 1;
         boolean registered      = false;
                 
         try{ 
                                    
-            insertStmt.setString( 1, bean.getFullName( ) );
-            insertStmt.setString( 2, bean.getEmail( ) );
-            insertStmt.setString( 3, bean.getPassword( ) );
-            insertStmt.setString( 4, bean.getCompanyName( ) );
-            insertStmt.setString( 5, bean.getPhone( ) );
+            insertStmt.setString( startColumnIndex++, bean.getFullName( ) );
+            insertStmt.setString( startColumnIndex++, bean.getEmail( ) );
+            insertStmt.setString( startColumnIndex++, bean.getPassword( ) );
+            insertStmt.setString( startColumnIndex++, bean.getCompanyName( ) );
+            insertStmt.setString( startColumnIndex++, bean.getPhone( ) );
             
-            insertStmt.setString( 6, bean.getAddress( ) );
-            insertStmt.setString( 7, bean.getCity( ) );
-            insertStmt.setString( 8, bean.getState( ) );
-            insertStmt.setString( 9, bean.getZip( ) );
-            insertStmt.setString( 10, bean.getOrganization( ) );
-            insertStmt.setString( 11, bean.getRole( ) );
+            insertStmt.setString( startColumnIndex++, bean.getAddress( ) );
+            insertStmt.setString( startColumnIndex++, bean.getCity( ) );
+            insertStmt.setString( startColumnIndex++, bean.getState( ) );
+            insertStmt.setString( startColumnIndex++, bean.getZip( ) );
+            insertStmt.setString( startColumnIndex++, bean.getOrganization( ) );
+            insertStmt.setString( startColumnIndex++, bean.getRole( ) );
+            insertStmt.setInt( startColumnIndex,   UserType.VIEW.getCode( ) );
                                     
             int updateResult    = insertStmt.executeUpdate( );
             registered          = ( updateResult > -1 );
@@ -122,7 +131,28 @@ public final class DBService {
         PreparedStatement pStatement = null;
     
         try {
-            pStatement  = connection.prepareStatement("INSERT INTO " + USER_TABLE + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            StringBuilder builder = new StringBuilder( 128 );
+            
+            builder.append( "INSERT INTO " ).append( USER_TABLE ).append( "( " );
+            builder.append( RegisterItem.FULL_NAME.getIName( ) ).append( "," );
+            builder.append( RegisterItem.EMAIL.getIName( ) ).append( "," );
+            builder.append( RegisterItem.PASSWORD.getIName( ) ).append( "," );
+            builder.append( RegisterItem.COMPANY.getIName( ) ).append( "," );
+            builder.append( RegisterItem.PHONE.getIName( ) ).append( "," );
+            builder.append( RegisterItem.ADDRESS.getIName( ) ).append( "," );
+            builder.append( RegisterItem.CITY.getIName( ) ).append( "," );
+            builder.append( RegisterItem.STATE.getIName( ) ).append( "," );
+            builder.append( RegisterItem.ZIPCODE.getIName( ) ).append( "," );
+            builder.append( RegisterItem.ORGANIZATION.getIName( ) ).append( "," );
+            builder.append( RegisterItem.ROLE.getIName( ) ).append( "," );
+            builder.append( RegisterItem.USER_TYPE_ID.getIName( ) );
+            builder.append( ") values " );
+            
+            builder.append( "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )" );
+            
+            String query    = builder.toString( );
+            pStatement      = connection.prepareStatement(query);
             
         }catch( Exception e ) {
             LOGGER.warn( "FAILED to created prepared statement.", e );

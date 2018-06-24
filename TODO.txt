@@ -30,10 +30,6 @@ Cancel
 ===================================
 1. Cancel button doesn't reset fields (after we have submitted the form)
 
-UI
-===================================
-1. Should I replace the second slide image?
-
 
 Admin Page
 ===================================
@@ -45,6 +41,11 @@ Admin Page
 	
 	
 NOTES:
+
+Search
+===================================
+What does the search button do on the main page?
+
 
 
 Set-up

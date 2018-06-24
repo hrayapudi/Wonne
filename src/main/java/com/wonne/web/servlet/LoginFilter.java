@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request      = (HttpServletRequest) req;
         HttpServletResponse response    = (HttpServletResponse) res;
         HttpSession session             = request.getSession( false );
-        boolean userAlreadyLoggedIn     = (session != null && SERVLET_SUCCESS.equals( session.getAttribute(LOGIN_STATUS_TAG) ));
+        boolean userAlreadyLoggedIn     = (session != null && session.getAttribute(LOGIN_BEAN_TAG) !=null );
         
         // User already logged in, so just continue request.
         if( userAlreadyLoggedIn ){

@@ -3,9 +3,11 @@ package com.wonne.web.register;
 import java.util.regex.*;
 import javax.mail.internet.*;
 
+import com.wonne.web.core.*;
+
 import static com.wonne.web.util.WonneUtil.*;
+import static com.wonne.web.core.ValidationResult.*;
 import static com.wonne.web.register.RegisterItem.*;
-import static com.wonne.web.register.ValidationResult.*;
 
 
 public final class RegisterValidator{

@@ -5,6 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import com.wonne.web.database.*;
+import com.wonne.web.login.*;
 
 import static com.wonne.web.register.RegisterItem.*;
 import static com.wonne.web.util.WonneUtil.*;
@@ -33,9 +34,8 @@ public class LoginServlet extends HttpServlet {
         
         String email        = request.getParameter( EMAIL.getIName( ) );
         String password     = request.getParameter( PASSWORD.getIName( ));
-        String fullName     = service.userPasswordMatch( email, password );
-        boolean userExists  = isValid( fullName );
-        if( !userExists ) {
+        LoginBean loginBean = service.userLogin( email, password );
+        if( loginBean == null ){
             handleError( LOGIN_ERR_MSGE, request, response );
             return;
         }
@@ -49,21 +49,19 @@ public class LoginServlet extends HttpServlet {
         //generate a new session
         HttpSession newSession = request.getSession(true);
         newSession.setMaxInactiveInterval( _10_MINUTES_IN_SECS );
-        handleSuccess( fullName, request, response );
+        handleSuccess( loginBean, request, response );
                 
     }
      
     
-    protected void handleSuccess( String fullName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.getSession( ).setAttribute( LOGIN_STATUS_TAG, SERVLET_SUCCESS);
-        request.getSession( ).setAttribute( LOGIN_MSG_TAG, fullName );
+    protected void handleSuccess( LoginBean bean, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getSession( ).setAttribute( LOGIN_BEAN_TAG, bean );
         response.sendRedirect( request.getContextPath() + LOGIN_PAGE );
     }
     
     
     protected void handleError( String errorReason, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.getSession( ).setAttribute( LOGIN_STATUS_TAG, SERVLET_FAILED);
-        request.getSession( ).setAttribute( LOGIN_MSG_TAG, errorReason );
+        request.getSession( ).setAttribute( LOGIN_BEAN_TAG, LoginBean.createError(errorReason) );
         request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
     }
     

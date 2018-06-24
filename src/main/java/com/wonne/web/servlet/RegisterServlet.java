@@ -5,6 +5,7 @@ import org.slf4j.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.wonne.web.core.*;
 import com.wonne.web.database.*;
 import com.wonne.web.register.*;
 
@@ -77,7 +78,6 @@ public class RegisterServlet extends HttpServlet {
             String city         = request.getParameter( CITY.getIName( ) );
             String state        = request.getParameter( STATE.getIName( ) );
             String zipcode      = request.getParameter( ZIPCODE.getIName( ) );
-            
             String organization = request.getParameter( ORGANIZATION.getIName( ) );
             String role         = request.getParameter( ROLE.getIName( ) );
      

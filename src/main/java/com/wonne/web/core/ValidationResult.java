@@ -1,4 +1,4 @@
-package com.wonne.web.register;
+package com.wonne.web.core;
 
 
 public final class ValidationResult{
