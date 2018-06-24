@@ -3,6 +3,7 @@ package com.wonne.web.database;
 import java.sql.*;
 import org.slf4j.*;
 
+import com.mysql.cj.jdbc.*;
 import com.wonne.web.core.*;
 import com.wonne.web.login.*;
 import com.wonne.web.register.*;
@@ -160,6 +161,14 @@ public final class DBService {
     
         return pStatement;
     
+    }
+
+
+    public final void close( ) throws SQLException {
+        connection.close();
+        AbandonedConnectionCleanupThread.checkedShutdown( );
+        LOGGER.info("Successfully closed connection to DB.");
+        
     }
     
     
